@@ -1,1 +1,23 @@
 /* You can add global styles to this file, and also import other style files */
+
+@font-face {
+  font-family: 'Comfortaa';
+  src: url('assets/fonts/Comfortaa-VariableFont_wght.ttf') format("truetype-variations");
+  font-weight: 1 999;
+}
+
+html,body {
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  background: radial-gradient(ellipse at center, #1B2735 0%, #090A0F 100%);
+  color:white;
+  font-family: Comfortaa, sans-serif;
+  min-height: 100%;
+}

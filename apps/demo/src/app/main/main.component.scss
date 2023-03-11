@@ -1,0 +1,16 @@
+:host {
+  display: grid;
+}
+
+.title, #stars {
+  grid-row: 1;
+  grid-column: 1;
+}
+
+.title {
+  place-self: center;
+}
+
+#stars{
+  z-index: 0;
+}
