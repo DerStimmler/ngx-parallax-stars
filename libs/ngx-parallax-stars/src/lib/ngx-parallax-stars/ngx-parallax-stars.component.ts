@@ -1,56 +1,72 @@
-import { ChangeDetectionStrategy, Component, ElementRef, Input, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {defaultStarLayers, StarLayer} from "../star-layer";
+import { defaultStarLayers, StarLayer } from '../star-layer';
 import { random } from '../utils';
-import {debounceTime, Subject, tap} from "rxjs";
+import { debounceTime, Subject, tap } from 'rxjs';
 
 @Component({
   selector: 'ngx-parallax-stars',
   standalone: true,
   imports: [CommonModule],
   template: '',
-  styles : [],
+  styles: [':host {overflow: hidden;}'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NgxParallaxStarsComponent implements OnInit{
+export class NgxParallaxStarsComponent implements OnInit, OnChanges {
   private width = 0;
   private height = 0;
 
-  private resize$ = new Subject<{height: number, width: number}>();
+  private resize$ = new Subject<{ height: number; width: number }>();
   @Input() layers: StarLayer[] = defaultStarLayers;
 
   constructor(private elRef: ElementRef) {}
 
-  ngOnInit(): void {
-    this.registerResizeObserver();
-
-    this.resize$.pipe(debounceTime(100),tap(dimensions => {
-      if (
-        Math.abs(dimensions.height - this.height) < 20 &&
-        Math.abs(dimensions.width - this.width) < 20
-      )
-        return;
-
-      this.height = dimensions.height;
-      this.width = dimensions.width;
-
-      this.renderStars();
-    })).subscribe();
+  ngOnChanges(changes: SimpleChanges): void {
+    this.renderStars();
   }
 
-  private registerResizeObserver() {
+  ngOnInit(): void {
+    this.observeResizeEvents();
+    this.handleResizeEvents();
+  }
+
+  private handleResizeEvents() {
+    this.resize$
+      .pipe(
+        debounceTime(100),
+        tap((dimensions) => {
+          this.height = dimensions.height;
+          this.width = dimensions.width;
+
+          this.renderStars();
+        })
+      )
+      .subscribe();
+  }
+
+  private observeResizeEvents() {
     const resizeObserver = new ResizeObserver((entries) => {
       for (const entry of entries) {
         const contentRect = entry.contentRect;
 
-        console.log(contentRect);
         if (
           Math.abs(contentRect.height - this.height) < 1 &&
           Math.abs(contentRect.width - this.width) < 1
         )
           continue;
 
-        this.resize$.next({height: contentRect.height, width: contentRect.width});
+        this.resize$.next({
+          height: contentRect.height,
+          width: contentRect.width,
+        });
       }
     });
 
@@ -111,10 +127,7 @@ export class NgxParallaxStarsComponent implements OnInit{
     const values = [];
 
     for (let i = 0; i < count; i++) {
-      const x = `${random(1, width)}px ${random(
-        1,
-        height
-      )}px ${color}`;
+      const x = `${random(1, width)}px ${random(1, height)}px ${color}`;
       values.push(x);
     }
 
