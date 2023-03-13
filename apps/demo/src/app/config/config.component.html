@@ -1,0 +1,44 @@
+<mat-card class="container">
+  <mat-card-content>
+    <div class="layers-form" [formGroup]="form">
+      <ng-container formArrayName="layers">
+        <ng-container *ngFor="let layerForm of layers.controls; let i = index">
+          <div [formGroupName]="i">
+            <mat-form-field appearance="fill">
+              <input matInput
+                     formControlName="color"
+                     placeholder="Color">
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+              <input matInput
+                     formControlName="speed"
+                     placeholder="Speed">
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+              <input matInput
+                     formControlName="count"
+                     placeholder="Count">
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+              <input matInput
+                     formControlName="size"
+                     placeholder="Size">
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+              <input matInput
+                     formControlName="direction"
+                     placeholder="Direction">
+            </mat-form-field>
+            <button mat-icon-button color="primary" aria-label="Button to delete a layer with delete icon" (click)="deleteLayer(i)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+        </ng-container>
+        </ng-container>
+    </div>
+
+    <button mat-mini-fab color="primary" (click)="addLayer()">
+      <mat-icon>add</mat-icon>
+    </button>
+  </mat-card-content>
+</mat-card>

@@ -1,2 +1,9 @@
 <h1 class="title">ngx-parallax-stars</h1>
-<ngx-parallax-stars id="stars"></ngx-parallax-stars>
+<ngx-parallax-stars id="stars" [layers]="layers"></ngx-parallax-stars>
+
+<button mat-fab color="accent" class="btn-config" aria-label="Button with settings icon to toggle configuration" (click)="toggleConfig()">
+  <mat-icon>{{isConfigOpen ? 'close' : 'settings'}}</mat-icon>
+</button>
+<ngx-parallax-stars-config class="config" [class.hidden]="!isConfigOpen" (layersChanged)="updateLayers($event)">
+
+</ngx-parallax-stars-config>

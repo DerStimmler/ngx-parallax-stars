@@ -1,5 +1,6 @@
 :host {
   display: grid;
+  height: 100vh;
 }
 
 .title, #stars {
@@ -10,8 +11,26 @@
 .title {
   place-self: center;
   text-shadow : 0 0 0.25em white;
+  z-index: 1;
 }
 
 #stars{
   z-index: 0;
+}
+
+.btn-config{
+  position:fixed;
+  bottom: 4rem;
+  right: 4rem
+}
+
+.config {
+  position: fixed;
+  bottom: 10rem;
+  right: 4rem;
+  z-index: 2;
+}
+
+.hidden {
+  display: none;
 }
