@@ -1,0 +1,29 @@
+.container {
+  max-height: calc(100vh - 12rem);
+  overflow-y: scroll;
+}
+
+.layers-form{
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.control-container{
+  display: grid;
+  grid-template-columns: 1fr 1fr max-content;
+  border-bottom: 1px solid black;
+
+  &:last-of-type {
+    border-bottom: revert;
+  }
+}
+
+.control-delete {
+  grid-column: 3;
+  grid-row: 1/4;
+}
+
+.control-count, .control-size, .control-speed {
+  grid-column: 1/3;
+}

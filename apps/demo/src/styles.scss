@@ -25,7 +25,8 @@ $demo-theme: mat.define-light-theme((
     primary: $demo-primary,
     accent: $demo-accent,
     warn: $demo-warn,
-  )
+  ),
+  density: -3
 ));
 
 // Include theme styles for core and each component used in your app.

@@ -12,6 +12,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { defaultStarLayers, StarLayer } from 'ngx-parallax-stars';
 import { debounceTime, tap } from 'rxjs';
+import { MatSliderModule } from '@angular/material/slider';
 
 @Component({
   selector: 'ngx-parallax-stars-config',
@@ -23,6 +24,7 @@ import { debounceTime, tap } from 'rxjs';
     ReactiveFormsModule,
     MatInputModule,
     MatIconModule,
+    MatSliderModule,
   ],
   templateUrl: './config.component.html',
   styleUrls: ['./config.component.scss'],
