@@ -48,7 +48,7 @@ export class ConfigComponent implements OnInit {
     const layerGroup = this.fb.group({
       color: [starLayer.color],
       speed: [starLayer.speed],
-      count: [starLayer.count],
+      density: [starLayer.density],
       size: [starLayer.size],
       direction: [starLayer.direction],
     });
@@ -65,7 +65,7 @@ export class ConfigComponent implements OnInit {
       this.fb.group({
         color: [layer.color],
         speed: [layer.speed],
-        count: [layer.count],
+        density: [layer.density],
         size: [layer.size],
         direction: [layer.direction],
       })

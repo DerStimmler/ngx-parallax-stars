@@ -1,34 +1,46 @@
 :host {
   display: grid;
-  height: 100vh;
 }
 
-.title, #stars {
+.title,
+#stars {
   grid-row: 1;
   grid-column: 1;
 }
 
 .title {
   place-self: center;
-  text-shadow : 0 0 0.25em white;
+  text-shadow: 0 0 0.25em white;
+  transition: text-shadow 0.4s ease-out;
+  cursor: default;
   z-index: 1;
+  padding: 2rem;
+
+  &:hover {
+    text-shadow: 0 0 0.75em white;
+  }
 }
 
-#stars{
+#stars {
   z-index: 0;
 }
 
-.btn-config{
-  position:fixed;
-  bottom: 4rem;
-  right: 4rem
+.config-container {
+  justify-items: end;
+  display: grid;
+  grid-template-rows: 1fr max-content;
+  grid-gap: 2rem;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  margin: 3rem;
+  box-sizing: border-box;
+  z-index: 2;
+  max-height: calc(100vh - 6rem);
 }
 
-.config {
-  position: fixed;
-  bottom: 10rem;
-  right: 4rem;
-  z-index: 2;
+.config-button {
+  grid-row: 2;
 }
 
 .hidden {

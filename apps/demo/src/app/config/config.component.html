@@ -1,40 +1,40 @@
-<mat-card class="container">
+<mat-card>
   <mat-card-content>
     <div class="layers-form" [formGroup]="form">
       <ng-container formArrayName="layers">
         <ng-container *ngFor="let layerForm of layers.controls; let i = index">
           <div [formGroupName]="i" class="control-container">
             <mat-form-field appearance="outline" class="control-color">
-              <input matInput
-                     formControlName="color"
-                     placeholder="Color">
+              <input matInput formControlName="color" placeholder="Color" />
             </mat-form-field>
             <mat-form-field appearance="outline" class="control-direction">
-              <input matInput
-                     formControlName="direction"
-                     placeholder="Direction">
+              <input
+                matInput
+                formControlName="direction"
+                placeholder="Direction"
+              />
             </mat-form-field>
             <mat-form-field appearance="outline" class="control-speed">
-              <input matInput
-                     formControlName="speed"
-                     placeholder="Speed">
+              <input matInput formControlName="speed" placeholder="Speed" />
             </mat-form-field>
-            <mat-form-field appearance="outline" class="control-count">
-              <input matInput
-                     formControlName="count"
-                     placeholder="Count">
+            <mat-form-field appearance="outline" class="control-density">
+              <input matInput formControlName="density" placeholder="Density" />
             </mat-form-field>
             <mat-form-field appearance="outline" class="control-size">
-              <input matInput
-                     formControlName="size"
-                     placeholder="Size">
+              <input matInput formControlName="size" placeholder="Size" />
             </mat-form-field>
-            <button mat-icon-button color="primary" class="control-delete" aria-label="Button to delete a layer with delete icon" (click)="deleteLayer(i)">
+            <button
+              mat-icon-button
+              color="primary"
+              class="control-delete"
+              aria-label="Button to delete a layer with delete icon"
+              (click)="deleteLayer(i)"
+            >
               <mat-icon>delete</mat-icon>
             </button>
           </div>
         </ng-container>
-        </ng-container>
+      </ng-container>
     </div>
 
     <button mat-mini-fab color="primary" (click)="addLayer()">
