@@ -26,6 +26,7 @@ $demo-theme: mat.define-light-theme(
       accent: $demo-accent,
       warn: $demo-warn,
     ),
+    typography: mat.define-typography-config(),
     density: -3,
   )
 );

@@ -13,6 +13,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { defaultStarLayers, StarLayer } from 'ngx-parallax-stars';
 import { debounceTime, tap } from 'rxjs';
 import { MatSliderModule } from '@angular/material/slider';
+import { MatSelectModule } from '@angular/material/select';
 
 @Component({
   selector: 'ngx-parallax-stars-config',
@@ -25,6 +26,7 @@ import { MatSliderModule } from '@angular/material/slider';
     MatInputModule,
     MatIconModule,
     MatSliderModule,
+    MatSelectModule,
   ],
   templateUrl: './config.component.html',
   styleUrls: ['./config.component.scss'],
@@ -58,6 +60,10 @@ export class ConfigComponent implements OnInit {
 
   deleteLayer(layerIndex: number): void {
     this.layers.removeAt(layerIndex);
+  }
+
+  formatSizeLabel(value: number): string {
+    return `${value}px`;
   }
 
   private buildForm(): FormGroup {

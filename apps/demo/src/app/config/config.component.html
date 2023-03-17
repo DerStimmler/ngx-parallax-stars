@@ -1,28 +1,44 @@
 <mat-card>
-  <mat-card-content>
+  <mat-card-content class="container">
     <div class="layers-form" [formGroup]="form">
       <ng-container formArrayName="layers">
         <ng-container *ngFor="let layerForm of layers.controls; let i = index">
           <div [formGroupName]="i" class="control-container">
             <mat-form-field appearance="outline" class="control-color">
-              <input matInput formControlName="color" placeholder="Color" />
+              <mat-label>color</mat-label>
+              <input matInput formControlName="color" type="color" />
             </mat-form-field>
             <mat-form-field appearance="outline" class="control-direction">
-              <input
-                matInput
-                formControlName="direction"
-                placeholder="Direction"
-              />
+              <mat-label>direction</mat-label>
+              <mat-select formControlName="direction" placeholder="upwards">
+                <mat-option [value]="'upwards'">upwards</mat-option>
+                <mat-option [value]="'downwards'">downwards</mat-option>
+              </mat-select>
             </mat-form-field>
-            <mat-form-field appearance="outline" class="control-speed">
-              <input matInput formControlName="speed" placeholder="Speed" />
-            </mat-form-field>
-            <mat-form-field appearance="outline" class="control-density">
-              <input matInput formControlName="density" placeholder="Density" />
-            </mat-form-field>
-            <mat-form-field appearance="outline" class="control-size">
-              <input matInput formControlName="size" placeholder="Size" />
-            </mat-form-field>
+            <div class="control-slider">
+              <label>speed</label>
+              <mat-slider min="1" max="500" step="1" discrete>
+                <input matSliderThumb formControlName="speed" />
+              </mat-slider>
+            </div>
+            <div class="control-slider">
+              <label>density</label>
+              <mat-slider min="1" max="100" step="1" discrete>
+                <input matSliderThumb formControlName="density" />
+              </mat-slider>
+            </div>
+            <div class="control-slider">
+              <label>size</label>
+              <mat-slider
+                min="1"
+                max="50"
+                step="1"
+                discrete
+                [displayWith]="formatSizeLabel"
+              >
+                <input matSliderThumb formControlName="size" />
+              </mat-slider>
+            </div>
             <button
               mat-icon-button
               color="primary"
