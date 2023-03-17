@@ -71,8 +71,6 @@ export class NgxParallaxStarsComponent implements OnInit, OnChanges, OnDestroy {
         this.height = contentRect.height;
         this.width = contentRect.width;
 
-        console.log(this.height, this.width);
-
         this.resize$.next();
       }
     });
@@ -92,8 +90,8 @@ export class NgxParallaxStarsComponent implements OnInit, OnChanges, OnDestroy {
       );
 
       const layerElement = document.createElement('div');
-      layerElement.style.width = layer.size;
-      layerElement.style.height = layer.size;
+      layerElement.style.width = `${layer.size}px`;
+      layerElement.style.height = `${layer.size}px`;
       layerElement.style.background = 'transparent';
       layerElement.style.boxShadow = boxShadow;
       layerElement.animate(
@@ -107,15 +105,15 @@ export class NgxParallaxStarsComponent implements OnInit, OnChanges, OnDestroy {
             }px)`,
           },
         ],
-        { duration: layer.speed * 1000, iterations: 5000 }
+        { duration: 1000000 / layer.speed, iterations: Infinity }
       );
 
       const afterLayerElement = document.createElement('span');
       afterLayerElement.style.content = ' ';
       afterLayerElement.style.position = 'absolute';
       afterLayerElement.style.top = `${this.height}px`;
-      afterLayerElement.style.width = layer.size;
-      afterLayerElement.style.height = layer.size;
+      afterLayerElement.style.width = `${layer.size}px`;
+      afterLayerElement.style.height = `${layer.size}px`;
       afterLayerElement.style.background = 'transparent';
       afterLayerElement.style.boxShadow = boxShadow;
 
