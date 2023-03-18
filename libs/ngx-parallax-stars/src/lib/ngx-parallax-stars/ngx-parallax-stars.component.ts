@@ -111,7 +111,10 @@ export class NgxParallaxStarsComponent implements OnInit, OnChanges, OnDestroy {
       const afterLayerElement = document.createElement('span');
       afterLayerElement.style.content = ' ';
       afterLayerElement.style.position = 'absolute';
-      afterLayerElement.style.top = `${this.height}px`;
+      if (layer.direction === 'upwards')
+        afterLayerElement.style.top = `${this.height}px`;
+      if (layer.direction === 'downwards')
+        afterLayerElement.style.bottom = `${this.height}px`;
       afterLayerElement.style.width = `${layer.size}px`;
       afterLayerElement.style.height = `${layer.size}px`;
       afterLayerElement.style.background = 'transparent';
