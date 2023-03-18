@@ -4,30 +4,34 @@
       <ng-container formArrayName="layers">
         <ng-container *ngFor="let layerForm of layers.controls; let i = index">
           <div [formGroupName]="i" class="control-container">
-            <mat-form-field appearance="outline" class="control-color">
+            <mat-form-field
+              appearance="outline"
+              subscriptSizing="dynamic"
+              class="control-color"
+            >
               <mat-label>color</mat-label>
               <input matInput formControlName="color" type="color" />
             </mat-form-field>
-            <mat-form-field appearance="outline" class="control-direction">
+            <mat-form-field
+              appearance="outline"
+              subscriptSizing="dynamic"
+              class="control-direction"
+            >
               <mat-label>direction</mat-label>
               <mat-select formControlName="direction" placeholder="upwards">
                 <mat-option [value]="'upwards'">upwards</mat-option>
                 <mat-option [value]="'downwards'">downwards</mat-option>
               </mat-select>
             </mat-form-field>
-            <div class="control-slider">
+            <div class="control-sliders">
               <label>speed</label>
               <mat-slider min="1" max="500" step="1" discrete>
                 <input matSliderThumb formControlName="speed" />
               </mat-slider>
-            </div>
-            <div class="control-slider">
               <label>density</label>
               <mat-slider min="1" max="100" step="1" discrete>
                 <input matSliderThumb formControlName="density" />
               </mat-slider>
-            </div>
-            <div class="control-slider">
               <label>size</label>
               <mat-slider
                 min="1"
