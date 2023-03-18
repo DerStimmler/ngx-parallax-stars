@@ -12,15 +12,16 @@
 }
 
 .title {
+  --shadow-color: #fff;
   place-self: center;
-  text-shadow: 0 0 0.25em white;
+  text-shadow: 0 0 0.25em var(--shadow-color);
   transition: text-shadow 0.4s ease-out;
   cursor: default;
   z-index: 1;
   padding: 2rem;
 
   &:hover {
-    text-shadow: 0 0 0.75em white;
+    text-shadow: 0 0 0.5em var(--shadow-color);
   }
 }
 
@@ -35,11 +36,13 @@
   z-index: 1;
 
   img {
+    --shadow-color: #ffffff6c;
+    filter: drop-shadow(0 0 0.125em var(--shadow-color));
     height: 3rem;
     transition: all 0.4s ease-out;
 
     &:hover {
-      filter: drop-shadow(0 0 0.5em #ffffff6c);
+      filter: drop-shadow(0 0 0.5em var(--shadow-color));
     }
   }
 }
