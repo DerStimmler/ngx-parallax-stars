@@ -24,6 +24,7 @@ import { ConfigComponent } from '../config/config.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MainComponent {
+  repoUrl = 'https://github.com/DerStimmler/ngx-parallax-stars';
   isConfigOpen = false;
   layers: StarLayer[] = defaultStarLayers;
 

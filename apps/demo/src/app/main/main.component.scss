@@ -1,9 +1,12 @@
 :host {
   display: grid;
+
+  --margin: 3rem;
 }
 
 .title,
-#stars {
+#stars,
+.repo-link {
   grid-row: 1;
   grid-column: 1;
 }
@@ -25,18 +28,34 @@
   z-index: 0;
 }
 
+.repo-link {
+  align-self: end;
+  justify-self: center;
+  margin-bottom: var(--margin);
+  z-index: 1;
+
+  img {
+    height: 3rem;
+    transition: all 0.4s ease-out;
+
+    &:hover {
+      filter: drop-shadow(0 0 0.5em #ffffff6c);
+    }
+  }
+}
+
 .config-container {
-  justify-items: end;
   display: grid;
-  grid-template-rows: 1fr max-content;
-  grid-gap: 2rem;
-  position: fixed;
   bottom: 0;
-  right: 0;
-  margin: 3rem;
   box-sizing: border-box;
+  grid-gap: 2rem;
+  grid-template-rows: 1fr max-content;
+  justify-items: end;
+  margin: var(--margin);
+  max-height: calc(100vh - 2 * var(--margin));
+  position: fixed;
+  right: 0;
   z-index: 2;
-  max-height: calc(100vh - 6rem);
 }
 
 .config-button {
