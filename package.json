@@ -2,7 +2,11 @@
   "name": "ngx-parallax-stars",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "demo": "nx serve demo",
+    "test": "nx run-many --all --target=test --parallel",
+    "build": "nx run-many --all --target=build --parallel"
+  },
   "private": true,
   "devDependencies": {
     "@angular-devkit/build-angular": "~15.2.0",
