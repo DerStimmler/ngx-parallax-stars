@@ -94,36 +94,83 @@ export class NgxParallaxStarsComponent implements OnInit, OnChanges, OnDestroy {
       layerElement.style.height = `${layer.size}px`;
       layerElement.style.background = 'transparent';
       layerElement.style.boxShadow = boxShadow;
-      layerElement.animate(
-        [
-          {
-            transform: 'translateY(0)',
-          },
-          {
-            transform: `translateY(${layer.direction === 'upwards' ? '-' : ''}${
-              this.height
-            }px)`,
-          },
-        ],
-        { duration: 1000000 / layer.speed, iterations: Infinity }
-      );
+      layerElement.animate(this.createKeyFramesForLayer(layer), {
+        duration: 1000000 / layer.speed,
+        iterations: Infinity,
+      });
 
       const afterLayerElement = document.createElement('span');
       afterLayerElement.style.content = ' ';
       afterLayerElement.style.position = 'absolute';
-      if (layer.direction === 'upwards')
-        afterLayerElement.style.top = `${this.height}px`;
-      if (layer.direction === 'downwards')
-        afterLayerElement.style.bottom = `${this.height}px`;
       afterLayerElement.style.width = `${layer.size}px`;
       afterLayerElement.style.height = `${layer.size}px`;
       afterLayerElement.style.background = 'transparent';
       afterLayerElement.style.boxShadow = boxShadow;
 
+      switch (layer.direction) {
+        case 'up':
+          afterLayerElement.style.top = `${this.height}px`;
+          break;
+        case 'down':
+          afterLayerElement.style.bottom = `${this.height}px`;
+          break;
+        case 'left':
+          afterLayerElement.style.left = `${this.width}px`;
+          break;
+        case 'right':
+          afterLayerElement.style.right = `${this.width}px`;
+          break;
+      }
+
       layerElement.appendChild(afterLayerElement);
 
       this.elRef.nativeElement.appendChild(layerElement);
     });
+  }
+
+  private createKeyFramesForLayer(layer: StarLayer) {
+    switch (layer.direction) {
+      case 'up': {
+        return [
+          {
+            transform: 'translateY(0)',
+          },
+          {
+            transform: `translateY(-${this.height}px)`,
+          },
+        ];
+      }
+      case 'down': {
+        return [
+          {
+            transform: 'translateY(0)',
+          },
+          {
+            transform: `translateY(${this.height}px)`,
+          },
+        ];
+      }
+      case 'left': {
+        return [
+          {
+            transform: 'translateX(0)',
+          },
+          {
+            transform: `translateX(-${this.width}px)`,
+          },
+        ];
+      }
+      case 'right': {
+        return [
+          {
+            transform: 'translateX(0)',
+          },
+          {
+            transform: `translateX(${this.width}px)`,
+          },
+        ];
+      }
+    }
   }
 
   private createBoxShadow(

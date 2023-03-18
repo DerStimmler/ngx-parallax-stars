@@ -9,7 +9,7 @@ export interface StarLayer {
    */
   density: number;
   speed: number;
-  direction: 'upwards' | 'downwards';
+  direction: 'up' | 'down' | 'left' | 'right';
 }
 
 export const defaultStarLayers: StarLayer[] = [
@@ -18,20 +18,20 @@ export const defaultStarLayers: StarLayer[] = [
     speed: 10,
     density: 7,
     size: 1,
-    direction: 'upwards',
+    direction: 'up',
   },
   {
     color: '#ffffff',
     speed: 15,
     density: 2,
     size: 2,
-    direction: 'upwards',
+    direction: 'up',
   },
   {
     color: '#ffffff',
     speed: 20,
     density: 1,
     size: 3,
-    direction: 'upwards',
+    direction: 'up',
   },
 ];
