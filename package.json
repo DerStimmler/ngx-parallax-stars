@@ -25,7 +25,8 @@
   "scripts": {
     "demo": "nx serve demo",
     "test": "nx run-many --all --target=test --parallel",
-    "build": "nx run-many --all --target=build --parallel"
+    "build": "nx run-many --all --target=build --parallel",
+    "lint": "nx run-many --all --target=lint --parallel"
   },
   "private": true,
   "devDependencies": {
