@@ -5,6 +5,8 @@
 ![build](https://github.com/DerStimmler/ngx-parallax-stars/actions/workflows/build.yml/badge.svg)
 [![GitHub license](https://img.shields.io/github/license/DerStimmler/ngx-parallax-stars)](https://github.com/DerStimmler/ngx-parallax-stars/blob/master/LICENSE.md)
 
+![banner](https://raw.githubusercontent.com/DerStimmler/ngx-parallax-stars/master/ngx-parallax-stars-banner.gif)
+
 Angular library to create beautiful stars with parallax effect.
 
 ## Demo
