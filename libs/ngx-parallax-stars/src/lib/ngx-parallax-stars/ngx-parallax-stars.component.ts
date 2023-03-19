@@ -11,14 +11,22 @@ import {
 import { CommonModule } from '@angular/common';
 import { defaultStarLayers, StarLayer } from '../star-layer';
 import { randomInt } from '../utils';
-import { debounceTime, first, Subject, takeUntil, takeWhile, tap } from 'rxjs';
+import {
+  debounceTime,
+  filter,
+  first,
+  Subject,
+  takeUntil,
+  takeWhile,
+  tap,
+} from 'rxjs';
 
 @Component({
   selector: 'ngx-parallax-stars',
   standalone: true,
   imports: [CommonModule],
   template: '',
-  styles: [':host {overflow: hidden;}'],
+  styles: [':host { display: block; overflow: hidden; }'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NgxParallaxStarsComponent implements OnInit, OnChanges, OnDestroy {
@@ -43,7 +51,7 @@ export class NgxParallaxStarsComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.renderStars();
+    if (this.haveLayersChanged(changes)) this.renderStars();
   }
 
   ngOnInit(): void {
@@ -52,10 +60,19 @@ export class NgxParallaxStarsComponent implements OnInit, OnChanges, OnDestroy {
     this.renderInitialStars();
   }
 
+  private haveLayersChanged(changes: SimpleChanges) {
+    return (
+      changes['layers'] &&
+      !changes['layers'].firstChange &&
+      JSON.stringify(changes['layers'].previousValue) !==
+        JSON.stringify(changes['layers'].currentValue)
+    );
+  }
+
   private handleResizeEvents() {
     this.resize$
       .pipe(
-        takeWhile(() => this.responsive),
+        filter(() => this.responsive),
         debounceTime(100),
         tap(() => this.renderStars()),
         takeUntil(this.destroy$)
