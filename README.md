@@ -73,13 +73,13 @@ layers: StarLayer[] = [
 <ngx-parallax-stars [layers]="layers"></ngx-parallax-stars>
 ```
 
-| Property            | Description                                                                                                                           |
-|---------------------|---------------------------------------------------------------------------------------------------------------------------------------|
-| `color: string`     | Sets the color of the stars. All color you can use in CSS should work e.g. `white`, `#ffffff`, `rgb(255,255,255)`, `hsl(0, 0%, 100%)` |
-| `speed: number`     | Sets the moving speed of the stars                                                                                                    |
-| `density: number`   | Specifies how many stars should be rendered per 100 by 100px area                                                                     |
-| `size: number`      | Specifies the size of every star in px                                                                                                |
-| `direction: string` | Determines the moving direction. Possible values are: `up`, `down`, `left`, `right`                                                   |
+| Property            | Description                                                                                                                            |
+|---------------------|----------------------------------------------------------------------------------------------------------------------------------------|
+| `color: string`     | Sets the color of the stars. All colors you can use in CSS should work e.g. `white`, `#ffffff`, `rgb(255,255,255)`, `hsl(0, 0%, 100%)` |
+| `speed: number`     | Sets the moving speed of the stars                                                                                                     |
+| `density: number`   | Specifies how many stars should be rendered per 100 by 100px area                                                                      |
+| `size: number`      | Specifies the size of every star in px                                                                                                 |
+| `direction: string` | Determines the moving direction. Possible values are: `up`, `down`, `left`, `right`                                                    |
 
 When you update the layers input binding, the component will automatically be re-rendered.
 
