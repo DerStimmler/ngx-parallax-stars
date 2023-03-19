@@ -1,5 +1,6 @@
 import { StarLayer } from 'ngx-parallax-stars';
 
-interface LayerConfig {
+export interface ConfigForm {
   layers: StarLayer[];
+  responsive: boolean;
 }

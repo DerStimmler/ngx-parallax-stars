@@ -14,6 +14,8 @@ import { defaultStarLayers, StarLayer } from 'ngx-parallax-stars';
 import { debounceTime, tap } from 'rxjs';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatSelectModule } from '@angular/material/select';
+import { ConfigForm } from './config-form';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 @Component({
   selector: 'ngx-parallax-stars-config',
@@ -27,6 +29,7 @@ import { MatSelectModule } from '@angular/material/select';
     MatIconModule,
     MatSliderModule,
     MatSelectModule,
+    MatSlideToggleModule,
   ],
   templateUrl: './config.component.html',
   styleUrls: ['./config.component.scss'],
@@ -34,7 +37,7 @@ import { MatSelectModule } from '@angular/material/select';
 export class ConfigComponent implements OnInit {
   form: FormGroup;
 
-  @Output() layersChanged = new EventEmitter<StarLayer[]>();
+  @Output() configChanged = new EventEmitter<ConfigForm>();
 
   constructor(private fb: NonNullableFormBuilder) {
     this.form = this.buildForm();
@@ -79,6 +82,7 @@ export class ConfigComponent implements OnInit {
 
     return this.fb.group({
       layers: this.fb.array(layerForms),
+      responsive: this.fb.control(true),
     });
   }
 
@@ -90,7 +94,7 @@ export class ConfigComponent implements OnInit {
     this.form.valueChanges
       .pipe(
         debounceTime(100),
-        tap(() => this.layersChanged.emit(this.form.getRawValue().layers))
+        tap(() => this.configChanged.emit(this.form.getRawValue()))
       )
       .subscribe();
   }

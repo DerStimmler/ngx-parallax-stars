@@ -8,6 +8,7 @@ import {
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { ConfigComponent } from '../config/config.component';
+import { ConfigForm } from '../config/config-form';
 
 @Component({
   selector: 'ngx-parallax-stars-main',
@@ -27,12 +28,14 @@ export class MainComponent {
   repoUrl = 'https://github.com/DerStimmler/ngx-parallax-stars';
   isConfigOpen = false;
   layers: StarLayer[] = defaultStarLayers;
+  responsive = true;
 
   toggleConfig() {
     this.isConfigOpen = !this.isConfigOpen;
   }
 
-  updateLayers(layers: StarLayer[]) {
-    this.layers = layers;
+  updateComponent(config: ConfigForm) {
+    this.layers = config.layers;
+    this.responsive = config.responsive;
   }
 }

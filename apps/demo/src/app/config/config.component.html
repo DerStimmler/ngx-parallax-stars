@@ -1,5 +1,5 @@
 <mat-card>
-  <mat-card-content class="container">
+  <mat-card-content>
     <div class="layers-form" [formGroup]="form">
       <ng-container formArrayName="layers">
         <ng-container *ngFor="let layerForm of layers.controls; let i = index">
@@ -57,10 +57,14 @@
           </div>
         </ng-container>
       </ng-container>
+      <button mat-mini-fab color="primary" (click)="addLayer()">
+        <mat-icon>add</mat-icon>
+      </button>
+      <div class="others-form">
+        <mat-slide-toggle formControlName="responsive" color="primary"
+          >Responsive</mat-slide-toggle
+        >
+      </div>
     </div>
-
-    <button mat-mini-fab color="primary" (click)="addLayer()">
-      <mat-icon>add</mat-icon>
-    </button>
   </mat-card-content>
 </mat-card>

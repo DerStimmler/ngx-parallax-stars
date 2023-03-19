@@ -1,5 +1,9 @@
 <h1 class="title"><a [href]="repoUrl">ngx-parallax-stars</a></h1>
-<ngx-parallax-stars id="stars" [layers]="layers"></ngx-parallax-stars>
+<ngx-parallax-stars
+  id="stars"
+  [layers]="layers"
+  [responsive]="responsive"
+></ngx-parallax-stars>
 <a [href]="repoUrl" class="repo-link">
   <img src="assets/images/github-mark-white.svg" alt="github logo"
 /></a>
@@ -7,7 +11,7 @@
 <div class="config-container">
   <ngx-parallax-stars-config
     [class.hidden]="!isConfigOpen"
-    (layersChanged)="updateLayers($event)"
+    (configChanged)="updateComponent($event)"
   >
   </ngx-parallax-stars-config>
   <button
