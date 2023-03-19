@@ -10,7 +10,7 @@ import {
 } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
-import { defaultStarLayers, StarLayer } from 'ngx-parallax-stars';
+import { defaultStarLayers } from 'ngx-parallax-stars';
 import { debounceTime, tap } from 'rxjs';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatSelectModule } from '@angular/material/select';
@@ -90,7 +90,7 @@ export class ConfigComponent implements OnInit {
     this.registerFormChanges();
   }
 
-  private registerFormChanges() {
+  private registerFormChanges(): void {
     this.form.valueChanges
       .pipe(
         debounceTime(100),

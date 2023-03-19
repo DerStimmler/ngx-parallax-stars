@@ -11,15 +11,7 @@ import {
 import { CommonModule } from '@angular/common';
 import { defaultStarLayers, StarLayer } from '../star-layer';
 import { randomInt } from '../utils';
-import {
-  debounceTime,
-  filter,
-  first,
-  Subject,
-  takeUntil,
-  takeWhile,
-  tap,
-} from 'rxjs';
+import { debounceTime, filter, first, Subject, takeUntil, tap } from 'rxjs';
 
 @Component({
   selector: 'ngx-parallax-stars',
@@ -30,10 +22,6 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NgxParallaxStarsComponent implements OnInit, OnChanges, OnDestroy {
-  private width = 0;
-  private height = 0;
-  private resize$ = new Subject<void>();
-  private destroy$ = new Subject<void>();
   /**
    * Overrides default star layers
    */
@@ -42,6 +30,10 @@ export class NgxParallaxStarsComponent implements OnInit, OnChanges, OnDestroy {
    * If responsive mode is enabled, the component will automatically be re-rendered when its size changes
    */
   @Input() responsive = true;
+  private width = 0;
+  private height = 0;
+  private resize$ = new Subject<void>();
+  private destroy$ = new Subject<void>();
 
   constructor(private elRef: ElementRef) {}
 
@@ -60,7 +52,7 @@ export class NgxParallaxStarsComponent implements OnInit, OnChanges, OnDestroy {
     this.renderInitialStars();
   }
 
-  private haveLayersChanged(changes: SimpleChanges) {
+  private haveLayersChanged(changes: SimpleChanges): boolean {
     return (
       changes['layers'] &&
       !changes['layers'].firstChange &&
@@ -69,7 +61,7 @@ export class NgxParallaxStarsComponent implements OnInit, OnChanges, OnDestroy {
     );
   }
 
-  private handleResizeEvents() {
+  private handleResizeEvents(): void {
     this.resize$
       .pipe(
         filter(() => this.responsive),
@@ -80,7 +72,7 @@ export class NgxParallaxStarsComponent implements OnInit, OnChanges, OnDestroy {
       .subscribe();
   }
 
-  private observeResizeEvents() {
+  private observeResizeEvents(): void {
     const resizeObserver = new ResizeObserver((entries) => {
       for (const entry of entries) {
         const contentRect = entry.contentRect;
@@ -101,7 +93,7 @@ export class NgxParallaxStarsComponent implements OnInit, OnChanges, OnDestroy {
     resizeObserver.observe(this.elRef.nativeElement);
   }
 
-  private renderStars() {
+  private renderStars(): void {
     this.elRef.nativeElement.replaceChildren();
 
     this.layers.forEach((layer) => {
@@ -151,7 +143,7 @@ export class NgxParallaxStarsComponent implements OnInit, OnChanges, OnDestroy {
     });
   }
 
-  private createKeyFramesForLayer(layer: StarLayer) {
+  private createKeyFramesForLayer(layer: StarLayer): Keyframe[] {
     switch (layer.direction) {
       case 'up': {
         return [
@@ -201,7 +193,7 @@ export class NgxParallaxStarsComponent implements OnInit, OnChanges, OnDestroy {
     height: number,
     density: number,
     color: string
-  ) {
+  ): string {
     const count = this.calculateCount(density, width, height);
 
     const values = [];
@@ -214,7 +206,7 @@ export class NgxParallaxStarsComponent implements OnInit, OnChanges, OnDestroy {
     return values.join(',');
   }
 
-  private renderInitialStars() {
+  private renderInitialStars(): void {
     this.resize$
       .pipe(
         first(),
