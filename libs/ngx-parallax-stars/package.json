@@ -1,6 +1,27 @@
 {
   "name": "ngx-parallax-stars",
   "version": "0.0.1",
+  "description": "Angular library to create beautiful stars with parallax effect.",
+  "keywords": [
+    "npm",
+    "ts",
+    "typescript",
+    "angular",
+    "ngx",
+    "parallax",
+    "stars",
+    "library"
+  ],
+  "author": "Stimmler",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/DerStimmler/ngx-parallax-stars"
+  },
+  "bugs": {
+    "url": "https://github.com/DerStimmler/ngx-parallax-stars/issues"
+  },
+  "homepage": "https://derstimmler.github.io/ngx-parallax-stars/",
   "peerDependencies": {
     "@angular/common": "^15.2.0",
     "@angular/core": "^15.2.0"
