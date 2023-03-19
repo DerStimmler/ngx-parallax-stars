@@ -102,6 +102,8 @@ You can access it on http://localhost:4200.
 
 Run `pnpm test` to test all projects.
 
+Run `pnpm lint` to lint all projects.
+
 Run `pnpm build` to build all projects. You can find the output under `/dist`.
 
 Since it's a nx workspace you can use the common nx commands for everything else.
