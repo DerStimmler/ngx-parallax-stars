@@ -25,6 +25,20 @@ Just import the standalone `NgxParallaxStarsComponent` into the component you wa
 
 ```typescript
 import NgxParallaxStarsComponent from 'ngx-parallax-stars';
+
+@Component({
+  selector: 'app-main',
+  standalone: true,
+  imports: [
+    CommonModule,
+    NgxParallaxStarsComponent,
+  ],
+  templateUrl: './main.component.html',
+  styleUrls: ['./main.component.scss']
+})
+export class MainComponent {
+
+}
 ```
 
 Then add the following to the template:
