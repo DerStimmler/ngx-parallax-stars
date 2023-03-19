@@ -10,7 +10,7 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { defaultStarLayers, StarLayer } from '../star-layer';
-import { random } from '../utils';
+import { randomInt } from '../utils';
 import { debounceTime, first, Subject, takeUntil, takeWhile, tap } from 'rxjs';
 
 @Component({
@@ -184,7 +184,7 @@ export class NgxParallaxStarsComponent implements OnInit, OnChanges, OnDestroy {
     const values = [];
 
     for (let i = 0; i < count; i++) {
-      const x = `${random(1, width)}px ${random(1, height)}px ${color}`;
+      const x = `${randomInt(1, width)}px ${randomInt(1, height)}px ${color}`;
       values.push(x);
     }
 
