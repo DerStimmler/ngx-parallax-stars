@@ -1,17 +1,29 @@
 export interface StarLayer {
+  /**
+   * Sets the color of the stars. All colors you can use in CSS should work e.g. white, #ffffff, rgb(255,255,255), hsl(0, 0%, 100%)
+   */
   color: string;
   /**
-   * Size of stars in px
+   * Specifies the size of every star in px
    */
   size: number;
   /**
-   * Amount of stars per 100x100 pixel
+   * Specifies how many stars should be rendered per 100 by 100px area
    */
   density: number;
+  /**
+   * Sets the moving speed of the stars
+   */
   speed: number;
+  /**
+   * Determines the moving direction. Possible values are: up, down, left, right
+   */
   direction: 'up' | 'down' | 'left' | 'right';
 }
 
+/**
+ * Default star layers that are rendered when no layers are provided to the ngx-parallax-stars component
+ */
 export const defaultStarLayers: StarLayer[] = [
   {
     color: '#ffffff',

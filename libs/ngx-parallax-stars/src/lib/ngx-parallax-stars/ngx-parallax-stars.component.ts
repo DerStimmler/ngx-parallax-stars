@@ -26,7 +26,13 @@ export class NgxParallaxStarsComponent implements OnInit, OnChanges, OnDestroy {
   private height = 0;
   private resize$ = new Subject<void>();
   private destroy$ = new Subject<void>();
+  /**
+   * Overrides default star layers
+   */
   @Input() layers: StarLayer[] = defaultStarLayers;
+  /**
+   * If responsive mode is enabled, the component will automatically be re-rendered when its size changes
+   */
   @Input() responsive = true;
 
   constructor(private elRef: ElementRef) {}
