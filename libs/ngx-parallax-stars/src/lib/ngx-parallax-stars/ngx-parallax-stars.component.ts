@@ -101,7 +101,9 @@ export class NgxParallaxStarsComponent implements OnInit, OnChanges, OnDestroy {
         this.width,
         this.height,
         layer.density,
-        layer.color
+        layer.color,
+        layer.blur,
+        layer.glow
       );
 
       const layerElement = document.createElement('div');
@@ -109,6 +111,7 @@ export class NgxParallaxStarsComponent implements OnInit, OnChanges, OnDestroy {
       layerElement.style.height = `${layer.size}px`;
       layerElement.style.background = 'transparent';
       layerElement.style.boxShadow = boxShadow;
+      layerElement.style.borderRadius = layer.isRound ? '50%' : '0';
       layerElement.animate(this.createKeyFramesForLayer(layer), {
         duration: 1000000 / layer.speed,
         iterations: Infinity,
@@ -192,18 +195,28 @@ export class NgxParallaxStarsComponent implements OnInit, OnChanges, OnDestroy {
     width: number,
     height: number,
     density: number,
-    color: string
+    color: string,
+    blur: number,
+    glow: number
   ): string {
     const count = this.calculateCount(density, width, height);
 
-    const values = [];
+    const shadows = [];
 
     for (let i = 0; i < count; i++) {
-      const x = `${randomInt(1, width)}px ${randomInt(1, height)}px ${color}`;
-      values.push(x);
+      const xPos = randomInt(1, width);
+      const yPos = randomInt(1, height);
+
+      const starShadow = `${xPos}px ${yPos}px ${blur}px 0 ${color}`;
+      shadows.push(starShadow);
+
+      if (glow !== 0) {
+        const glowShadow = `${xPos}px ${yPos}px ${glow}px 0 ${color}`;
+        shadows.push(glowShadow);
+      }
     }
 
-    return values.join(',');
+    return shadows.join(',');
   }
 
   private renderInitialStars(): void {

@@ -40,11 +40,32 @@
                 max="50"
                 step="1"
                 discrete
-                [displayWith]="formatSizeLabel"
+                [displayWith]="formatPxLabel"
               >
                 <input matSliderThumb formControlName="size" />
               </mat-slider>
+              <label>blur</label>
+              <mat-slider min="0" max="20" step="1" discrete>
+                <input matSliderThumb formControlName="blur" />
+              </mat-slider>
+              <label>glow</label>
+              <mat-slider
+                min="0"
+                max="20"
+                step="1"
+                discrete
+                [displayWith]="formatPxLabel"
+              >
+                <input matSliderThumb formControlName="glow" />
+              </mat-slider>
             </div>
+            <mat-checkbox
+              labelPosition="before"
+              color="primary"
+              formControlName="isRound"
+            >
+              isRound
+            </mat-checkbox>
             <button
               mat-icon-button
               color="primary"

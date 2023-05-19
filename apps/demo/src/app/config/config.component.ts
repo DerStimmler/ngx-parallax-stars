@@ -16,6 +16,7 @@ import { MatSliderModule } from '@angular/material/slider';
 import { MatSelectModule } from '@angular/material/select';
 import { ConfigForm } from './config-form';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @Component({
   selector: 'ngx-parallax-stars-config',
@@ -30,6 +31,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     MatSliderModule,
     MatSelectModule,
     MatSlideToggleModule,
+    MatCheckboxModule,
   ],
   templateUrl: './config.component.html',
   styleUrls: ['./config.component.scss'],
@@ -56,6 +58,9 @@ export class ConfigComponent implements OnInit {
       density: [starLayer.density],
       size: [starLayer.size],
       direction: [starLayer.direction],
+      blur: [starLayer.blur],
+      glow: [starLayer.glow],
+      isRound: [starLayer.isRound],
     });
 
     this.layers.push(layerGroup);
@@ -65,7 +70,7 @@ export class ConfigComponent implements OnInit {
     this.layers.removeAt(layerIndex);
   }
 
-  formatSizeLabel(value: number): string {
+  formatPxLabel(value: number): string {
     return `${value}px`;
   }
 
@@ -77,6 +82,9 @@ export class ConfigComponent implements OnInit {
         density: [layer.density],
         size: [layer.size],
         direction: [layer.direction],
+        blur: [layer.blur],
+        glow: [layer.glow],
+        isRound: [layer.isRound],
       })
     );
 

@@ -19,6 +19,18 @@ export interface StarLayer {
    * Determines the moving direction. Possible values are: up, down, left, right
    */
   direction: 'up' | 'down' | 'left' | 'right';
+  /**
+   * Sets the amount of blur for every star
+   */
+  blur: number;
+  /**
+   * Sets the glow radius in px
+   */
+  glow: number;
+  /**
+   * Set to true to make the stars round instead of square
+   */
+  isRound: boolean;
 }
 
 /**
@@ -31,6 +43,9 @@ export const defaultStarLayers: StarLayer[] = [
     density: 7,
     size: 1,
     direction: 'up',
+    blur: 5,
+    glow: 1,
+    isRound: false,
   },
   {
     color: '#ffffff',
@@ -38,6 +53,9 @@ export const defaultStarLayers: StarLayer[] = [
     density: 2,
     size: 2,
     direction: 'up',
+    blur: 1,
+    glow: 2,
+    isRound: false,
   },
   {
     color: '#ffffff',
@@ -45,5 +63,8 @@ export const defaultStarLayers: StarLayer[] = [
     density: 1,
     size: 3,
     direction: 'up',
+    blur: 0,
+    glow: 5,
+    isRound: false,
   },
 ];
