@@ -42,3 +42,10 @@
   padding: 1rem 0;
   width: 100%;
 }
+
+:host::ng-deep {
+  mat-checkbox label {
+    color: black;
+    font-size: 1rem;
+  }
+}
