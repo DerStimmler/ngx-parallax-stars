@@ -7,7 +7,7 @@
 
 ![banner](https://raw.githubusercontent.com/DerStimmler/ngx-parallax-stars/master/ngx-parallax-stars-banner.gif)
 
-Angular library to create beautiful stars with parallax effect.
+Angular library to create beautiful stars with parallax effect
 
 ## Demo
 
