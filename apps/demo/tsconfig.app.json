@@ -2,6 +2,7 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "outDir": "../../dist/out-tsc",
+    "noUnusedLocals": true,
     "types": []
   },
   "files": ["src/main.ts"],

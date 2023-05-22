@@ -39,7 +39,6 @@
   img {
     --shadow-color: #ffffff6c;
     filter: drop-shadow(0 0 0.125em var(--shadow-color));
-    height: 3rem;
     transition: all 0.4s ease-out;
 
     &:hover {
