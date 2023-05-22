@@ -1,0 +1,13 @@
+:host {
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.025) 0%,
+    rgba(255, 255, 255, 0) 50%
+  );
+  height: 30rem;
+  pointer-events: none;
+  position: fixed;
+  transform: translate(-50%, -50%);
+  width: 30rem;
+  z-index: 999;
+}
