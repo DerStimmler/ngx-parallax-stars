@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -8,10 +8,10 @@ import { CommonModule } from '@angular/common';
   templateUrl: './mouse-highlighter.component.html',
   styleUrls: ['./mouse-highlighter.component.scss'],
 })
-export class MouseHighlighterComponent implements OnInit {
+export class MouseHighlighterComponent implements AfterViewInit {
   constructor(private element: ElementRef) {}
 
-  ngOnInit(): void {
+  ngAfterViewInit(): void {
     document.body.addEventListener('mousemove', (e: MouseEvent) => {
       this.element.nativeElement.style.top = `${e.y}px`;
       this.element.nativeElement.style.left = `${e.x}px`;

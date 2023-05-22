@@ -88,6 +88,15 @@
         <mat-slide-toggle formControlName="responsive" color="primary"
           >Responsive</mat-slide-toggle
         >
+        <button
+          mat-stroked-button
+          color="primary"
+          aria-label="Button to export star layers"
+          (click)="exportLayers()"
+        >
+          <mat-icon>content_copy</mat-icon>
+          Copy to clipboard
+        </button>
       </div>
     </div>
   </mat-card-content>

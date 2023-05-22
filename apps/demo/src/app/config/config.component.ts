@@ -17,6 +17,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { ConfigForm } from './config-form';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { Clipboard } from '@angular/cdk/clipboard';
 
 @Component({
   selector: 'ngx-parallax-stars-config',
@@ -41,7 +42,10 @@ export class ConfigComponent implements OnInit {
 
   @Output() configChanged = new EventEmitter<ConfigForm>();
 
-  constructor(private fb: NonNullableFormBuilder) {
+  constructor(
+    private fb: NonNullableFormBuilder,
+    private clipboard: Clipboard
+  ) {
     this.form = this.buildForm();
   }
 
@@ -96,6 +100,11 @@ export class ConfigComponent implements OnInit {
 
   ngOnInit(): void {
     this.registerFormChanges();
+  }
+
+  exportLayers(): void {
+    const layers = JSON.stringify(this.layers.getRawValue());
+    this.clipboard.copy(layers);
   }
 
   private registerFormChanges(): void {

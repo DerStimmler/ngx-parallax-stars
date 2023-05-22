@@ -35,9 +35,10 @@
 }
 
 .others-form {
-  border-top: 1px solid black;
+  align-items: center;
+  border-top: 1px solid lightgrey;
   display: flex;
-  justify-items: start;
+  justify-content: space-between;
   padding: 1rem 0;
   width: 100%;
 }
