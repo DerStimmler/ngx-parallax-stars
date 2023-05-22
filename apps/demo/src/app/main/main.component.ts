@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 import {
   defaultStarLayers,
   NgxParallaxStarsComponent,
@@ -19,6 +19,7 @@ import { ConfigForm } from '../config/config-form';
     MatButtonModule,
     MatIconModule,
     ConfigComponent,
+    NgOptimizedImage,
   ],
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.scss'],
