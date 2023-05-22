@@ -9,6 +9,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { ConfigComponent } from '../config/config.component';
 import { ConfigForm } from '../config/config-form';
+import {MouseHighlighterComponent} from "../mouse-highlighter/mouse-highlighter.component";
 
 @Component({
   selector: 'ngx-parallax-stars-main',
@@ -20,6 +21,7 @@ import { ConfigForm } from '../config/config-form';
     MatIconModule,
     ConfigComponent,
     NgOptimizedImage,
+    MouseHighlighterComponent,
   ],
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.scss'],
