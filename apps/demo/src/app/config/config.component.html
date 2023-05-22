@@ -2,7 +2,10 @@
   <mat-card-content>
     <div class="layers-form" [formGroup]="form">
       <ng-container formArrayName="layers">
-        <ng-container *ngFor="let layerForm of layers.controls; let i = index">
+        <mat-card
+          *ngFor="let layerForm of layers.controls; let i = index"
+          class="card"
+        >
           <div [formGroupName]="i" class="control-container">
             <mat-form-field
               appearance="outline"
@@ -76,7 +79,7 @@
               <mat-icon>delete</mat-icon>
             </button>
           </div>
-        </ng-container>
+        </mat-card>
       </ng-container>
       <button mat-mini-fab color="primary" (click)="addLayer()">
         <mat-icon>add</mat-icon>

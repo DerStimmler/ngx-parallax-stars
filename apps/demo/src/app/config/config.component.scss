@@ -11,10 +11,9 @@
 }
 
 .control-container {
+  align-items: center;
   display: grid;
   grid-template-columns: 1fr 1fr max-content;
-  border-bottom: 1px solid lightgray;
-  padding: 1rem 0;
   column-gap: 0.5rem;
 
   &:first-child {
@@ -41,6 +40,10 @@
   justify-items: start;
   padding: 1rem 0;
   width: 100%;
+}
+
+.card {
+  padding: 1em;
 }
 
 :host::ng-deep {
