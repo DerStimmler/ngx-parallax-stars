@@ -1,12 +1,17 @@
 :host {
   display: grid;
   --margin: 3rem;
+
+  @media (max-width: 480px) {
+    --margin: 1rem;
+  }
 }
 
 .title,
 #stars,
 .repo-link,
-.version {
+.version,
+.config-container {
   grid-row: 1;
   grid-column: 1;
 }
@@ -54,16 +59,15 @@
 }
 
 .config-container {
+  align-self: end;
   display: grid;
-  bottom: 0;
   box-sizing: border-box;
   grid-gap: 2rem;
   grid-template-rows: 1fr max-content;
   justify-items: end;
+  justify-self: end;
   margin: var(--margin);
   max-height: calc(100vh - 2 * var(--margin));
-  position: fixed;
-  right: 0;
   z-index: 2;
 }
 
