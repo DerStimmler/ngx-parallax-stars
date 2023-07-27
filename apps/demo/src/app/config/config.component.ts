@@ -10,7 +10,7 @@ import {
 } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
-import { defaultStarLayers } from 'ngx-parallax-stars';
+import { defaultStarLayers, StarLayer } from 'ngx-parallax-stars';
 import { debounceTime, tap } from 'rxjs';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatSelectModule } from '@angular/material/select';
@@ -18,7 +18,8 @@ import { ConfigForm } from './config-form';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { Clipboard } from '@angular/cdk/clipboard';
-import {MatTooltipModule} from "@angular/material/tooltip";
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { LayerRandomizerService } from './layer-randomizer.service';
 
 @Component({
   selector: 'ngx-parallax-stars-config',
@@ -46,7 +47,8 @@ export class ConfigComponent implements OnInit {
 
   constructor(
     private fb: NonNullableFormBuilder,
-    private clipboard: Clipboard
+    private clipboard: Clipboard,
+    private layerRandomizerService: LayerRandomizerService
   ) {
     this.form = this.buildForm();
   }
@@ -56,18 +58,9 @@ export class ConfigComponent implements OnInit {
   }
 
   addLayer(): void {
-    const starLayer = defaultStarLayers[0];
+    const layer = defaultStarLayers[0];
 
-    const layerGroup = this.fb.group({
-      color: [starLayer.color],
-      speed: [starLayer.speed],
-      density: [starLayer.density],
-      size: [starLayer.size],
-      direction: [starLayer.direction],
-      blur: [starLayer.blur],
-      glow: [starLayer.glow],
-      isRound: [starLayer.isRound],
-    });
+    const layerGroup = this.createLayerFormGroup(layer);
 
     this.layers.push(layerGroup);
   }
@@ -82,21 +75,25 @@ export class ConfigComponent implements OnInit {
 
   private buildForm(): FormGroup {
     const layerForms = defaultStarLayers.map((layer) =>
-      this.fb.group({
-        color: [layer.color],
-        speed: [layer.speed],
-        density: [layer.density],
-        size: [layer.size],
-        direction: [layer.direction],
-        blur: [layer.blur],
-        glow: [layer.glow],
-        isRound: [layer.isRound],
-      })
+      this.createLayerFormGroup(layer)
     );
 
     return this.fb.group({
       layers: this.fb.array(layerForms),
       responsive: this.fb.control(true),
+    });
+  }
+
+  private createLayerFormGroup(layer: StarLayer) {
+    return this.fb.group({
+      color: [layer.color],
+      speed: [layer.speed],
+      density: [layer.density],
+      size: [layer.size],
+      direction: [layer.direction],
+      blur: [layer.blur],
+      glow: [layer.glow],
+      isRound: [layer.isRound],
     });
   }
 
@@ -107,6 +104,14 @@ export class ConfigComponent implements OnInit {
   exportLayers(): void {
     const layers = JSON.stringify(this.layers.getRawValue());
     this.clipboard.copy(layers);
+  }
+
+  randomizeLayers(): void {
+    const layers = this.layerRandomizerService.generateRandomLayers();
+
+    const layerForms = layers.map((layer) => this.createLayerFormGroup(layer));
+
+    this.form.setControl('layers', this.fb.array(layerForms));
   }
 
   private registerFormChanges(): void {
