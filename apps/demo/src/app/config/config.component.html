@@ -6,6 +6,19 @@
           *ngFor="let layerForm of layers.controls; let i = index"
           class="card"
         >
+          <mat-card-header class="card-header">
+            <mat-card-title>Layer #{{i + 1}}</mat-card-title>
+            <button
+              mat-icon-button
+              color="primary"
+              class="control-delete"
+              aria-label="Button to delete a layer with delete icon"
+              matTooltip="Remove layer"
+              (click)="deleteLayer(i)"
+            >
+              <mat-icon>delete</mat-icon>
+            </button>
+          </mat-card-header>
           <div [formGroupName]="i" class="control-container">
             <mat-form-field
               appearance="outline"
@@ -69,19 +82,10 @@
             >
               isRound
             </mat-checkbox>
-            <button
-              mat-icon-button
-              color="primary"
-              class="control-delete"
-              aria-label="Button to delete a layer with delete icon"
-              (click)="deleteLayer(i)"
-            >
-              <mat-icon>delete</mat-icon>
-            </button>
           </div>
         </mat-card>
       </ng-container>
-      <button mat-mini-fab color="primary" (click)="addLayer()">
+      <button mat-mini-fab color="primary" matTooltip="Add layer" (click)="addLayer()">
         <mat-icon>add</mat-icon>
       </button>
       <div class="others-form">

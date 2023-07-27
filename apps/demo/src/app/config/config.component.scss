@@ -13,7 +13,7 @@
 .control-container {
   align-items: center;
   display: grid;
-  grid-template-columns: 1fr 1fr max-content;
+  grid-template-columns: 1fr 1fr;
   column-gap: 0.5rem;
 
   &:first-child {
@@ -45,6 +45,12 @@
 
 .card {
   padding: 1em;
+
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 0 1rem 0;
+  }
 }
 
 :host::ng-deep {

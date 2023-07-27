@@ -18,6 +18,7 @@ import { ConfigForm } from './config-form';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { Clipboard } from '@angular/cdk/clipboard';
+import {MatTooltipModule} from "@angular/material/tooltip";
 
 @Component({
   selector: 'ngx-parallax-stars-config',
@@ -33,6 +34,7 @@ import { Clipboard } from '@angular/cdk/clipboard';
     MatSelectModule,
     MatSlideToggleModule,
     MatCheckboxModule,
+    MatTooltipModule,
   ],
   templateUrl: './config.component.html',
   styleUrls: ['./config.component.scss'],
