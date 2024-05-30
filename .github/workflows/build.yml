@@ -35,6 +35,12 @@ jobs:
       - name: Lint
         run: pnpm lint
 
+      - name: SPA 404 workaround
+        shell: sh
+        if: runner.os == 'Linux'
+        run: |
+          cp dist/apps/demo/index.html dist/apps/demo/404.html
+
       - name: Archive artifact
         shell: sh
         if: runner.os == 'Linux'
@@ -51,7 +57,7 @@ jobs:
             .
 
       - name: Upload artifact
-        uses: actions/upload-artifact@main
+        uses: actions/upload-artifact@v4
         with:
           name: github-pages
           path: ${{ runner.temp }}/artifact.tar
@@ -70,4 +76,4 @@ jobs:
     steps:
       - name: Deploy demo to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v1
+        uses: actions/deploy-pages@v4
