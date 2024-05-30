@@ -7,7 +7,7 @@
 
 ![banner](https://raw.githubusercontent.com/DerStimmler/ngx-parallax-stars/master/ngx-parallax-stars-banner.gif)
 
-Angular library to create beautiful stars with parallax effect.
+Angular library to create beautiful stars with parallax effect
 
 ## Demo
 
@@ -67,6 +67,9 @@ layers: StarLayer[] = [
     density: 7,
     size: 1,
     direction: 'up',
+    blur: 5,
+    glow: 1,
+    isRound: false,
   },
   {
     color: '#ffffff',
@@ -74,6 +77,9 @@ layers: StarLayer[] = [
     density: 2,
     size: 2,
     direction: 'up',
+    blur: 1,
+    glow: 2,
+    isRound: false,
   },
   {
     color: '#ffffff',
@@ -81,6 +87,9 @@ layers: StarLayer[] = [
     density: 1,
     size: 3,
     direction: 'up',
+    blur: 0,
+    glow: 5,
+    isRound: false,
   }
 ];
 ```
@@ -96,6 +105,9 @@ layers: StarLayer[] = [
 | `density: number`   | Specifies how many stars should be rendered per 100 by 100px area                                                                      |
 | `size: number`      | Specifies the size of every star in px                                                                                                 |
 | `direction: string` | Determines the moving direction. Possible values are: `up`, `down`, `left`, `right`                                                    |
+| `blur: number`      | Sets the amount of blur for every star                                                                                                 |
+| `glow: number`      | Sets the glow radius in px                                                                                                             |
+| `isRound: boolean`  | Set to true to make the stars round instead of square                                                                                  |
 
 When you update the layers input binding, the component will automatically be re-rendered.
 
