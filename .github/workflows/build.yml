@@ -39,18 +39,18 @@ jobs:
         shell: sh
         if: runner.os == 'Linux'
         run: |
-          cp dist/apps/demo/index.html dist/apps/demo/404.html
+          cp dist/apps/demo/browser/index.html dist/apps/demo/browser/404.html
 
       - name: Archive artifact
         shell: sh
         if: runner.os == 'Linux'
         run: |
-          chmod -c -R +rX "dist/apps/demo/" | while read line; do
+          chmod -c -R +rX "dist/apps/demo/browser/" | while read line; do
             echo "::warning title=Invalid file permissions automatically fixed::$line"
           done
           tar \
             --dereference --hard-dereference \
-            --directory "dist/apps/demo/" \
+            --directory "dist/apps/demo/browser/" \
             -cvf "$RUNNER_TEMP/artifact.tar" \
             --exclude=.git \
             --exclude=.github \
