@@ -1,17 +1,17 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  effect,
   ElementRef,
-  Input,
-  OnChanges,
-  OnDestroy,
-  OnInit,
-  SimpleChanges,
+  inject,
+  input,
+  signal,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { defaultStarLayers, StarLayer } from '../star-layer';
-import { randomInt } from '../utils';
-import { debounceTime, filter, first, Subject, takeUntil, tap } from 'rxjs';
+import { randomInt, resizeObservable } from '../utils';
+import { debounceTime, filter } from 'rxjs';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'ngx-parallax-stars',
@@ -21,85 +21,47 @@ import { debounceTime, filter, first, Subject, takeUntil, tap } from 'rxjs';
   styles: [':host { display: block; overflow: hidden; }'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NgxParallaxStarsComponent implements OnInit, OnChanges, OnDestroy {
+export class NgxParallaxStarsComponent {
+  #elRef = inject(ElementRef);
+
   /**
    * Overrides default star layers
    */
-  @Input() layers: StarLayer[] = defaultStarLayers;
+  layers = input<StarLayer[]>(defaultStarLayers);
   /**
    * If responsive mode is enabled, the component will automatically be re-rendered when its size changes
    */
-  @Input() responsive = true;
-  private width = 0;
-  private height = 0;
-  private resize$ = new Subject<void>();
-  private destroy$ = new Subject<void>();
+  responsive = input<boolean>(true);
 
-  constructor(private elRef: ElementRef) {}
+  #size = toSignal(
+    resizeObservable(this.#elRef.nativeElement).pipe(
+      filter(() => this.responsive() || !this.#initialized()),
+      debounceTime(100)
+    )
+  );
+  #initialized = signal(false);
 
-  ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.complete();
-  }
+  constructor() {
+    effect(
+      () => {
+        const size = this.#size();
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if (this.haveLayersChanged(changes)) this.renderStars();
-  }
-
-  ngOnInit(): void {
-    this.observeResizeEvents();
-    this.handleResizeEvents();
-    this.renderInitialStars();
-  }
-
-  private haveLayersChanged(changes: SimpleChanges): boolean {
-    return (
-      changes['layers'] &&
-      !changes['layers'].firstChange &&
-      JSON.stringify(changes['layers'].previousValue) !==
-        JSON.stringify(changes['layers'].currentValue)
+        if (size) {
+          this.#renderStars(this.layers(), size.width, size.height);
+          this.#initialized.set(true);
+        }
+      },
+      { allowSignalWrites: true }
     );
   }
 
-  private handleResizeEvents(): void {
-    this.resize$
-      .pipe(
-        filter(() => this.responsive),
-        debounceTime(100),
-        tap(() => this.renderStars()),
-        takeUntil(this.destroy$)
-      )
-      .subscribe();
-  }
+  #renderStars(layers: StarLayer[], width: number, height: number): void {
+    this.#elRef.nativeElement.replaceChildren();
 
-  private observeResizeEvents(): void {
-    const resizeObserver = new ResizeObserver((entries) => {
-      for (const entry of entries) {
-        const contentRect = entry.contentRect;
-
-        if (
-          Math.abs(contentRect.height - this.height) < 1 &&
-          Math.abs(contentRect.width - this.width) < 1
-        )
-          continue;
-
-        this.height = contentRect.height;
-        this.width = contentRect.width;
-
-        this.resize$.next();
-      }
-    });
-
-    resizeObserver.observe(this.elRef.nativeElement);
-  }
-
-  private renderStars(): void {
-    this.elRef.nativeElement.replaceChildren();
-
-    this.layers.forEach((layer) => {
-      const boxShadow = this.createBoxShadow(
-        this.width,
-        this.height,
+    layers.forEach((layer) => {
+      const boxShadow = this.#createBoxShadow(
+        width,
+        height,
         layer.density,
         layer.color,
         layer.blur,
@@ -112,10 +74,13 @@ export class NgxParallaxStarsComponent implements OnInit, OnChanges, OnDestroy {
       layerElement.style.background = 'transparent';
       layerElement.style.boxShadow = boxShadow;
       layerElement.style.borderRadius = layer.isRound ? '50%' : '0';
-      layerElement.animate(this.createKeyFramesForLayer(layer), {
-        duration: 1000000 / layer.speed,
-        iterations: Infinity,
-      });
+      layerElement.animate(
+        this.#createKeyFramesForLayer(layer, width, height),
+        {
+          duration: 1000000 / layer.speed,
+          iterations: Infinity,
+        }
+      );
 
       const afterLayerElement = document.createElement('span');
       afterLayerElement.style.content = ' ';
@@ -127,26 +92,30 @@ export class NgxParallaxStarsComponent implements OnInit, OnChanges, OnDestroy {
 
       switch (layer.direction) {
         case 'up':
-          afterLayerElement.style.top = `${this.height}px`;
+          afterLayerElement.style.top = `${height}px`;
           break;
         case 'down':
-          afterLayerElement.style.bottom = `${this.height}px`;
+          afterLayerElement.style.bottom = `${height}px`;
           break;
         case 'left':
-          afterLayerElement.style.left = `${this.width}px`;
+          afterLayerElement.style.left = `${width}px`;
           break;
         case 'right':
-          afterLayerElement.style.right = `${this.width}px`;
+          afterLayerElement.style.right = `${width}px`;
           break;
       }
 
       layerElement.appendChild(afterLayerElement);
 
-      this.elRef.nativeElement.appendChild(layerElement);
+      this.#elRef.nativeElement.appendChild(layerElement);
     });
   }
 
-  private createKeyFramesForLayer(layer: StarLayer): Keyframe[] {
+  #createKeyFramesForLayer(
+    layer: StarLayer,
+    width: number,
+    height: number
+  ): Keyframe[] {
     switch (layer.direction) {
       case 'up': {
         return [
@@ -154,7 +123,7 @@ export class NgxParallaxStarsComponent implements OnInit, OnChanges, OnDestroy {
             transform: 'translateY(0)',
           },
           {
-            transform: `translateY(-${this.height}px)`,
+            transform: `translateY(-${height}px)`,
           },
         ];
       }
@@ -164,7 +133,7 @@ export class NgxParallaxStarsComponent implements OnInit, OnChanges, OnDestroy {
             transform: 'translateY(0)',
           },
           {
-            transform: `translateY(${this.height}px)`,
+            transform: `translateY(${height}px)`,
           },
         ];
       }
@@ -174,7 +143,7 @@ export class NgxParallaxStarsComponent implements OnInit, OnChanges, OnDestroy {
             transform: 'translateX(0)',
           },
           {
-            transform: `translateX(-${this.width}px)`,
+            transform: `translateX(-${width}px)`,
           },
         ];
       }
@@ -184,14 +153,14 @@ export class NgxParallaxStarsComponent implements OnInit, OnChanges, OnDestroy {
             transform: 'translateX(0)',
           },
           {
-            transform: `translateX(${this.width}px)`,
+            transform: `translateX(${width}px)`,
           },
         ];
       }
     }
   }
 
-  private createBoxShadow(
+  #createBoxShadow(
     width: number,
     height: number,
     density: number,
@@ -199,7 +168,7 @@ export class NgxParallaxStarsComponent implements OnInit, OnChanges, OnDestroy {
     blur: number,
     glow: number
   ): string {
-    const count = this.calculateCount(density, width, height);
+    const count = this.#calculateCount(density, width, height);
 
     const shadows = [];
 
@@ -219,20 +188,7 @@ export class NgxParallaxStarsComponent implements OnInit, OnChanges, OnDestroy {
     return shadows.join(',');
   }
 
-  private renderInitialStars(): void {
-    this.resize$
-      .pipe(
-        first(),
-        tap(() => this.renderStars())
-      )
-      .subscribe();
-  }
-
-  private calculateCount(
-    density: number,
-    width: number,
-    height: number
-  ): number {
+  #calculateCount(density: number, width: number, height: number): number {
     return density * (width / 100) * (height / 100);
   }
 }
