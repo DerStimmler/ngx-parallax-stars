@@ -23,8 +23,8 @@
   },
   "homepage": "https://derstimmler.github.io/ngx-parallax-stars/",
   "peerDependencies": {
-    "@angular/common": ">=15.2.0",
-    "@angular/core": ">=15.2.0"
+    "@angular/common": ">=18.0.1",
+    "@angular/core": ">=18.0.1"
   },
   "dependencies": {
     "tslib": "^2.6.2"
