@@ -3,11 +3,11 @@
     <div class="layers-form" [formGroup]="form">
       <ng-container formArrayName="layers">
         <mat-card
-          *ngFor="let layerForm of layers.controls; let i = index"
+          *ngFor="let layerForm of formLayers.controls; let i = index"
           class="card"
         >
           <mat-card-header class="card-header">
-            <mat-card-title>Layer #{{i + 1}}</mat-card-title>
+            <mat-card-title>Layer #{{ i + 1 }}</mat-card-title>
             <button
               mat-icon-button
               color="primary"
@@ -85,13 +85,21 @@
           </div>
         </mat-card>
       </ng-container>
-      <button mat-mini-fab color="primary" matTooltip="Add layer" (click)="addLayer()">
-        <mat-icon>add</mat-icon>
-      </button>
-      <div class="others-form">
+      <div class="grid-1">
+        <button
+          mat-mini-fab
+          color="primary"
+          matTooltip="Add layer"
+          (click)="addLayer()"
+        >
+          <mat-icon>add</mat-icon>
+        </button>
         <mat-slide-toggle formControlName="responsive" color="primary"
           >Responsive</mat-slide-toggle
         >
+      </div>
+      <mat-divider class="divider"></mat-divider>
+      <div class="grid-2">
         <button
           mat-stroked-button
           color="primary"
@@ -101,8 +109,12 @@
           <mat-icon>content_copy</mat-icon>
           Copy to clipboard
         </button>
-        <i></i>
-        <button mat-mini-fab color="primary" matTooltip="Create random layers" (click)="randomizeLayers()">
+        <button
+          mat-mini-fab
+          color="primary"
+          matTooltip="Create random layers"
+          (click)="randomizeLayers()"
+        >
           <mat-icon>auto_mode</mat-icon>
         </button>
       </div>

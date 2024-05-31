@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
@@ -11,7 +11,7 @@ import {
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { defaultStarLayers, StarLayer } from 'ngx-parallax-stars';
-import { debounceTime, tap } from 'rxjs';
+import { debounceTime, map } from 'rxjs';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatSelectModule } from '@angular/material/select';
 import { ConfigForm } from './config-form';
@@ -20,6 +20,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { Clipboard } from '@angular/cdk/clipboard';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { LayerRandomizerService } from './layer-randomizer.service';
+import { outputFromObservable } from '@angular/core/rxjs-interop';
+import { MatDivider } from '@angular/material/divider';
 
 @Component({
   selector: 'ngx-parallax-stars-config',
@@ -36,56 +38,58 @@ import { LayerRandomizerService } from './layer-randomizer.service';
     MatSlideToggleModule,
     MatCheckboxModule,
     MatTooltipModule,
+    MatDivider,
   ],
   templateUrl: './config.component.html',
   styleUrls: ['./config.component.scss'],
 })
-export class ConfigComponent implements OnInit {
-  form: FormGroup;
+export class ConfigComponent {
+  #fb = inject(NonNullableFormBuilder);
+  #clipboard = inject(Clipboard);
+  #layerRandomizerService = inject(LayerRandomizerService);
 
-  @Output() configChanged = new EventEmitter<ConfigForm>();
+  protected form = this.#buildForm(this.#fb);
 
-  constructor(
-    private fb: NonNullableFormBuilder,
-    private clipboard: Clipboard,
-    private layerRandomizerService: LayerRandomizerService
-  ) {
-    this.form = this.buildForm();
-  }
+  configChanged = outputFromObservable<ConfigForm>(
+    this.form.valueChanges.pipe(
+      debounceTime(100),
+      map(() => this.form.getRawValue())
+    )
+  );
 
-  get layers(): FormArray {
+  protected get formLayers(): FormArray {
     return this.form.controls['layers'] as FormArray;
   }
 
-  addLayer(): void {
+  protected addLayer(): void {
     const layer = defaultStarLayers[0];
 
-    const layerGroup = this.createLayerFormGroup(layer);
+    const layerGroup = this.createLayerFormGroup(layer, this.#fb);
 
-    this.layers.push(layerGroup);
+    this.formLayers.push(layerGroup);
   }
 
-  deleteLayer(layerIndex: number): void {
-    this.layers.removeAt(layerIndex);
+  protected deleteLayer(layerIndex: number): void {
+    this.formLayers.removeAt(layerIndex);
   }
 
-  formatPxLabel(value: number): string {
+  protected formatPxLabel(value: number): string {
     return `${value}px`;
   }
 
-  private buildForm(): FormGroup {
+  #buildForm(fb: NonNullableFormBuilder): FormGroup {
     const layerForms = defaultStarLayers.map((layer) =>
-      this.createLayerFormGroup(layer)
+      this.createLayerFormGroup(layer, fb)
     );
 
-    return this.fb.group({
-      layers: this.fb.array(layerForms),
-      responsive: this.fb.control(true),
+    return fb.group({
+      layers: fb.array(layerForms),
+      responsive: fb.control(true),
     });
   }
 
-  private createLayerFormGroup(layer: StarLayer) {
-    return this.fb.group({
+  private createLayerFormGroup(layer: StarLayer, fb: NonNullableFormBuilder) {
+    return fb.group({
       color: [layer.color],
       speed: [layer.speed],
       density: [layer.density],
@@ -97,29 +101,18 @@ export class ConfigComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
-    this.registerFormChanges();
+  protected exportLayers(): void {
+    const layers = JSON.stringify(this.formLayers.getRawValue());
+    this.#clipboard.copy(layers);
   }
 
-  exportLayers(): void {
-    const layers = JSON.stringify(this.layers.getRawValue());
-    this.clipboard.copy(layers);
-  }
+  protected randomizeLayers(): void {
+    const layers = this.#layerRandomizerService.generateRandomLayers();
 
-  randomizeLayers(): void {
-    const layers = this.layerRandomizerService.generateRandomLayers();
+    const layerForms = layers.map((layer) =>
+      this.createLayerFormGroup(layer, this.#fb)
+    );
 
-    const layerForms = layers.map((layer) => this.createLayerFormGroup(layer));
-
-    this.form.setControl('layers', this.fb.array(layerForms));
-  }
-
-  private registerFormChanges(): void {
-    this.form.valueChanges
-      .pipe(
-        debounceTime(100),
-        tap(() => this.configChanged.emit(this.form.getRawValue()))
-      )
-      .subscribe();
+    this.form.setControl('layers', this.#fb.array(layerForms));
   }
 }

@@ -2,8 +2,8 @@
 
 <ngx-parallax-stars
   id="stars"
-  [layers]="layers"
-  [responsive]="responsive"
+  [layers]="layers()"
+  [responsive]="responsive()"
 ></ngx-parallax-stars>
 
 <a [href]="repoUrl" class="repo-link">
@@ -18,7 +18,7 @@
 
 <div class="config-container">
   <ngx-parallax-stars-config
-    [class.hidden]="!isConfigOpen"
+    [class.hidden]="!isConfigOpen()"
     (configChanged)="updateComponent($event)"
   >
   </ngx-parallax-stars-config>
@@ -29,7 +29,7 @@
     class="config-button"
     (click)="toggleConfig()"
   >
-    <mat-icon>{{ isConfigOpen ? 'close' : 'settings' }}</mat-icon>
+    <mat-icon>{{ isConfigOpen() ? 'close' : 'settings' }}</mat-icon>
   </button>
 </div>
 

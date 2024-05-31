@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import {
   defaultStarLayers,
@@ -9,7 +9,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { ConfigComponent } from '../config/config.component';
 import { ConfigForm } from '../config/config-form';
-import {MouseHighlighterComponent} from "../mouse-highlighter/mouse-highlighter.component";
+import { MouseHighlighterComponent } from '../mouse-highlighter/mouse-highlighter.component';
 
 @Component({
   selector: 'ngx-parallax-stars-main',
@@ -29,16 +29,16 @@ import {MouseHighlighterComponent} from "../mouse-highlighter/mouse-highlighter.
 })
 export class MainComponent {
   repoUrl = 'https://github.com/DerStimmler/ngx-parallax-stars';
-  isConfigOpen = false;
-  layers: StarLayer[] = defaultStarLayers;
-  responsive = true;
+  isConfigOpen = signal<boolean>(false);
+  layers = signal<StarLayer[]>(defaultStarLayers);
+  responsive = signal<boolean>(true);
 
   toggleConfig() {
-    this.isConfigOpen = !this.isConfigOpen;
+    this.isConfigOpen.update((isOpen) => !isOpen);
   }
 
   updateComponent(config: ConfigForm) {
-    this.layers = config.layers;
-    this.responsive = config.responsive;
+    this.layers.set(config.layers);
+    this.responsive.set(config.responsive);
   }
 }
