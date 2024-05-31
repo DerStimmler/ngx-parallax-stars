@@ -1,5 +1,5 @@
-<mat-card>
-  <mat-card-content>
+<mat-card class="card">
+  <mat-card-content class="content">
     <div class="layers-form" [formGroup]="form">
       <ng-container formArrayName="layers">
         <mat-card
@@ -19,70 +19,72 @@
               <mat-icon>delete</mat-icon>
             </button>
           </mat-card-header>
-          <div [formGroupName]="i" class="control-container">
-            <mat-form-field
-              appearance="outline"
-              subscriptSizing="dynamic"
-              class="control-color"
-            >
-              <mat-label>color</mat-label>
-              <input matInput formControlName="color" type="color" />
-            </mat-form-field>
-            <mat-form-field
-              appearance="outline"
-              subscriptSizing="dynamic"
-              class="control-direction"
-            >
-              <mat-label>direction</mat-label>
-              <mat-select formControlName="direction" placeholder="up">
-                <mat-option [value]="'up'">up</mat-option>
-                <mat-option [value]="'down'">down</mat-option>
-                <mat-option [value]="'left'">left</mat-option>
-                <mat-option [value]="'right'">right</mat-option>
-              </mat-select>
-            </mat-form-field>
-            <div class="control-sliders">
-              <label>speed</label>
-              <mat-slider min="0" max="500" step="1" discrete>
-                <input matSliderThumb formControlName="speed" />
-              </mat-slider>
-              <label>density</label>
-              <mat-slider min="1" max="100" step="1" discrete>
-                <input matSliderThumb formControlName="density" />
-              </mat-slider>
-              <label>size</label>
-              <mat-slider
-                min="1"
-                max="50"
-                step="1"
-                discrete
-                [displayWith]="formatPxLabel"
+          <mat-card-content>
+            <div [formGroupName]="i" class="control-container">
+              <mat-form-field
+                appearance="outline"
+                subscriptSizing="dynamic"
+                class="control-color"
               >
-                <input matSliderThumb formControlName="size" />
-              </mat-slider>
-              <label>blur</label>
-              <mat-slider min="0" max="20" step="1" discrete>
-                <input matSliderThumb formControlName="blur" />
-              </mat-slider>
-              <label>glow</label>
-              <mat-slider
-                min="0"
-                max="20"
-                step="1"
-                discrete
-                [displayWith]="formatPxLabel"
+                <mat-label>color</mat-label>
+                <input matInput formControlName="color" type="color" />
+              </mat-form-field>
+              <mat-form-field
+                appearance="outline"
+                subscriptSizing="dynamic"
+                class="control-direction"
               >
-                <input matSliderThumb formControlName="glow" />
-              </mat-slider>
+                <mat-label>direction</mat-label>
+                <mat-select formControlName="direction" placeholder="up">
+                  <mat-option [value]="'up'">up</mat-option>
+                  <mat-option [value]="'down'">down</mat-option>
+                  <mat-option [value]="'left'">left</mat-option>
+                  <mat-option [value]="'right'">right</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <div class="control-sliders">
+                <label>speed</label>
+                <mat-slider min="0" max="500" step="1" discrete>
+                  <input matSliderThumb formControlName="speed" />
+                </mat-slider>
+                <label>density</label>
+                <mat-slider min="1" max="100" step="1" discrete>
+                  <input matSliderThumb formControlName="density" />
+                </mat-slider>
+                <label>size</label>
+                <mat-slider
+                  min="1"
+                  max="50"
+                  step="1"
+                  discrete
+                  [displayWith]="formatPxLabel"
+                >
+                  <input matSliderThumb formControlName="size" />
+                </mat-slider>
+                <label>blur</label>
+                <mat-slider min="0" max="20" step="1" discrete>
+                  <input matSliderThumb formControlName="blur" />
+                </mat-slider>
+                <label>glow</label>
+                <mat-slider
+                  min="0"
+                  max="20"
+                  step="1"
+                  discrete
+                  [displayWith]="formatPxLabel"
+                >
+                  <input matSliderThumb formControlName="glow" />
+                </mat-slider>
+              </div>
+              <mat-checkbox
+                labelPosition="before"
+                color="primary"
+                formControlName="isRound"
+              >
+                isRound
+              </mat-checkbox>
             </div>
-            <mat-checkbox
-              labelPosition="before"
-              color="primary"
-              formControlName="isRound"
-            >
-              isRound
-            </mat-checkbox>
-          </div>
+          </mat-card-content>
         </mat-card>
       </ng-container>
       <div class="grid-1">

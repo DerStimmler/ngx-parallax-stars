@@ -1,5 +1,14 @@
 :host {
   color: #000000;
+  min-height: 0;
+}
+
+.card {
+  height: 100%;
+}
+
+.content {
+  height: 100%;
   overflow-y: scroll;
 }
 
@@ -76,7 +85,9 @@
 
 :host::ng-deep {
   mat-checkbox label {
+    font-family: Comfortaa, sans-serif;
     color: black;
     font-size: 1rem;
+    margin-right: 0.25rem;
   }
 }
