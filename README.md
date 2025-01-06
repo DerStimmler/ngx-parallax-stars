@@ -2,7 +2,6 @@
 
 [![npm version](https://img.shields.io/npm/v/ngx-parallax-stars)](https://www.npmjs.org/package/ngx-parallax-stars/)
 [![npm downloads](https://img.shields.io/npm/dt/ngx-parallax-stars)](https://www.npmjs.org/package/ngx-parallax-stars/)
-![build](https://github.com/DerStimmler/ngx-parallax-stars/actions/workflows/build.yml/badge.svg)
 [![GitHub license](https://img.shields.io/github/license/DerStimmler/ngx-parallax-stars)](https://github.com/DerStimmler/ngx-parallax-stars/blob/master/LICENSE.md)
 
 ![banner](https://raw.githubusercontent.com/DerStimmler/ngx-parallax-stars/master/ngx-parallax-stars-banner.gif)
