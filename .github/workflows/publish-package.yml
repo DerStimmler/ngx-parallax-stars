@@ -49,20 +49,21 @@ jobs:
           npm version ${{ env.VERSION }} --no-git-tag-version
         working-directory: dist/libs/ngx-parallax-stars
 
-      - name: Archive package directory
+      - name: Pack package
         run: |
-          tar -czvf ngx-parallax-stars-${{ env.VERSION }}.tar.gz dist/libs/ngx-parallax-stars
+          npm pack --pack-destination '..'
+        working-directory: dist/libs/ngx-parallax-stars
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          path: ngx-parallax-stars-${{ env.VERSION }}.tar.gz
+          path: dist/libs/ngx-parallax-stars-${{ env.VERSION }}.tgz
 
       - name: Attach package to GitHub release
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: ngx-parallax-stars-${{ env.VERSION }}.tar.gz
+          file: dist/libs/ngx-parallax-stars-${{ env.VERSION }}.tgz
           tag: ${{ github.ref }}
           overwrite: true
 
