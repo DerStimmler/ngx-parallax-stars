@@ -1,6 +1,5 @@
 {
   "name": "ngx-parallax-stars",
-  "version": "3.0.0",
   "description": "Angular library to create beautiful stars with parallax effect.",
   "keywords": [
     "npm",
@@ -23,10 +22,10 @@
   },
   "homepage": "https://derstimmler.github.io/ngx-parallax-stars/",
   "scripts": {
-    "demo": "nx serve demo",
-    "test": "nx run-many --all --target=test --parallel",
-    "build": "nx run-many --all --target=build --parallel",
-    "lint": "nx run-many --all --target=lint --parallel"
+    "demo": "pnpm nx serve demo",
+    "test": "pnpm nx run-many --all --target=test --parallel",
+    "build": "pnpm nx run-many --all --target=build --parallel",
+    "lint": "pnpm nx run-many --all --target=lint --parallel"
   },
   "private": true,
   "devDependencies": {

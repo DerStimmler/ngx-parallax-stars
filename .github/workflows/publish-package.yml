@@ -1,0 +1,60 @@
+name: "Publish package"
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  publish:
+    name: Publish
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 'latest'
+
+      - name: Setup node
+        uses: actions/setup-node@v4
+        with:
+            cache: 'pnpm'
+            registry-url: 'https://registry.npmjs.org'
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Build
+        run: pnpm nx build ngx-parallax-stars --configuration=production
+
+      - name: Test
+        run: pnpm nx test ngx-parallax-stars
+
+      - name: Lint
+        run: pnpm nx lint ngx-parallax-stars
+
+      - name: Extract version from tag
+        run: |
+          # Extract the version from the tag (e.g., 'refs/tags/v1.2.3' -> '1.2.3')
+          VERSION=${GITHUB_REF#refs/tags/v}
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
+
+      - name: Set version
+        run: |
+          npm version ${{ env.VERSION }} --no-git-tag-version
+        working-directory: dist/libs/ngx-parallax-stars
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          path: dist/libs/ngx-parallax-stars
+
+      - name: Publish package to npm
+        run: |
+          npm publish
+        working-directory: dist/libs/ngx-parallax-stars
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
