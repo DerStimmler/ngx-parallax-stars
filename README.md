@@ -25,11 +25,11 @@ npm install ngx-parallax-stars
 Just import the standalone `NgxParallaxStarsComponent` into the component you want to use it in.
 
 ```typescript
-import NgxParallaxStarsComponent from 'ngx-parallax-stars';
+import { NgxParallaxStarsComponent } from 'ngx-parallax-stars';
 
 @Component({
   selector: 'app-main',
-  imports: [CommonModule, NgxParallaxStarsComponent],
+  imports: [NgxParallaxStarsComponent],
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.scss'],
 })
