@@ -15,8 +15,7 @@ export function resizeObservable(element: Element): Observable<{
       for (const entry of entries) {
         const contentRect = entry.contentRect;
 
-        if (Math.abs(contentRect.height) < 1 && Math.abs(contentRect.width) < 1)
-          continue;
+        if (Math.abs(contentRect.height) < 1 && Math.abs(contentRect.width) < 1) continue;
 
         return subscriber.next({
           width: contentRect.width,

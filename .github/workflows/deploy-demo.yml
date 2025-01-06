@@ -1,4 +1,4 @@
-name: "Deploy demo"
+name: 'Deploy demo'
 on:
   workflow_dispatch:
   push:
@@ -21,7 +21,7 @@ jobs:
       - name: Setup node
         uses: actions/setup-node@v4
         with:
-            cache: 'pnpm'
+          cache: 'pnpm'
 
       - name: Install dependencies
         run: pnpm install

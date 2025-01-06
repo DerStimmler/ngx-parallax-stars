@@ -1,12 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  effect,
-  ElementRef,
-  inject,
-  input,
-  signal,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, effect, ElementRef, inject, input, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { defaultStarLayers, StarLayer } from '../star-layer';
 import { randomInt, resizeObservable } from '../utils';
@@ -14,11 +6,11 @@ import { debounceTime, filter } from 'rxjs';
 import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
-    selector: 'ngx-parallax-stars',
-    imports: [CommonModule],
-    template: '',
-    styles: [':host { display: block; overflow: hidden; }'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+  selector: 'ngx-parallax-stars',
+  imports: [CommonModule],
+  template: '',
+  styles: [':host { display: block; overflow: hidden; }'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NgxParallaxStarsComponent {
   #elRef = inject(ElementRef);
@@ -58,14 +50,7 @@ export class NgxParallaxStarsComponent {
     this.#elRef.nativeElement.replaceChildren();
 
     layers.forEach((layer) => {
-      const boxShadow = this.#createBoxShadow(
-        width,
-        height,
-        layer.density,
-        layer.color,
-        layer.blur,
-        layer.glow
-      );
+      const boxShadow = this.#createBoxShadow(width, height, layer.density, layer.color, layer.blur, layer.glow);
 
       const layerElement = document.createElement('div');
       layerElement.style.width = `${layer.size}px`;
@@ -73,13 +58,10 @@ export class NgxParallaxStarsComponent {
       layerElement.style.background = 'transparent';
       layerElement.style.boxShadow = boxShadow;
       layerElement.style.borderRadius = layer.isRound ? '50%' : '0';
-      layerElement.animate(
-        this.#createKeyFramesForLayer(layer, width, height),
-        {
-          duration: 1000000 / layer.speed,
-          iterations: Infinity,
-        }
-      );
+      layerElement.animate(this.#createKeyFramesForLayer(layer, width, height), {
+        duration: 1000000 / layer.speed,
+        iterations: Infinity,
+      });
 
       const afterLayerElement = document.createElement('span');
       afterLayerElement.style.content = ' ';
@@ -110,11 +92,7 @@ export class NgxParallaxStarsComponent {
     });
   }
 
-  #createKeyFramesForLayer(
-    layer: StarLayer,
-    width: number,
-    height: number
-  ): Keyframe[] {
+  #createKeyFramesForLayer(layer: StarLayer, width: number, height: number): Keyframe[] {
     switch (layer.direction) {
       case 'up': {
         return [
@@ -159,14 +137,7 @@ export class NgxParallaxStarsComponent {
     }
   }
 
-  #createBoxShadow(
-    width: number,
-    height: number,
-    density: number,
-    color: string,
-    blur: number,
-    glow: number
-  ): string {
+  #createBoxShadow(width: number, height: number, density: number, color: string, blur: number, glow: number): string {
     const count = this.#calculateCount(density, width, height);
 
     const shadows = [];

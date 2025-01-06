@@ -31,16 +31,11 @@ import NgxParallaxStarsComponent from 'ngx-parallax-stars';
 @Component({
   selector: 'app-main',
   standalone: true,
-  imports: [
-    CommonModule,
-    NgxParallaxStarsComponent,
-  ],
+  imports: [CommonModule, NgxParallaxStarsComponent],
   templateUrl: './main.component.html',
-  styleUrls: ['./main.component.scss']
+  styleUrls: ['./main.component.scss'],
 })
-export class MainComponent {
-
-}
+export class MainComponent {}
 ```
 
 Then add the following to the template:
@@ -99,7 +94,7 @@ layers: StarLayer[] = [
 ```
 
 | Property            | Description                                                                                                                            |
-|---------------------|----------------------------------------------------------------------------------------------------------------------------------------|
+| ------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
 | `color: string`     | Sets the color of the stars. All colors you can use in CSS should work e.g. `white`, `#ffffff`, `rgb(255,255,255)`, `hsl(0, 0%, 100%)` |
 | `speed: number`     | Sets the moving speed of the stars                                                                                                     |
 | `density: number`   | Specifies how many stars should be rendered per 100 by 100px area                                                                      |

@@ -2,12 +2,7 @@ import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
-import {
-  FormArray,
-  FormGroup,
-  NonNullableFormBuilder,
-  ReactiveFormsModule,
-} from '@angular/forms';
+import { FormArray, FormGroup, NonNullableFormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { defaultStarLayers, StarLayer } from 'ngx-parallax-stars';
@@ -24,23 +19,23 @@ import { outputFromObservable } from '@angular/core/rxjs-interop';
 import { MatDivider } from '@angular/material/divider';
 
 @Component({
-    selector: 'ngx-parallax-stars-config',
-    imports: [
-        CommonModule,
-        MatCardModule,
-        MatButtonModule,
-        ReactiveFormsModule,
-        MatInputModule,
-        MatIconModule,
-        MatSliderModule,
-        MatSelectModule,
-        MatSlideToggleModule,
-        MatCheckboxModule,
-        MatTooltipModule,
-        MatDivider,
-    ],
-    templateUrl: './config.component.html',
-    styleUrls: ['./config.component.scss']
+  selector: 'ngx-parallax-stars-config',
+  imports: [
+    CommonModule,
+    MatCardModule,
+    MatButtonModule,
+    ReactiveFormsModule,
+    MatInputModule,
+    MatIconModule,
+    MatSliderModule,
+    MatSelectModule,
+    MatSlideToggleModule,
+    MatCheckboxModule,
+    MatTooltipModule,
+    MatDivider,
+  ],
+  templateUrl: './config.component.html',
+  styleUrls: ['./config.component.scss'],
 })
 export class ConfigComponent {
   #fb = inject(NonNullableFormBuilder);
@@ -77,9 +72,7 @@ export class ConfigComponent {
   }
 
   #buildForm(fb: NonNullableFormBuilder): FormGroup {
-    const layerForms = defaultStarLayers.map((layer) =>
-      this.createLayerFormGroup(layer, fb)
-    );
+    const layerForms = defaultStarLayers.map((layer) => this.createLayerFormGroup(layer, fb));
 
     return fb.group({
       layers: fb.array(layerForms),
@@ -108,9 +101,7 @@ export class ConfigComponent {
   protected randomizeLayers(): void {
     const layers = this.#layerRandomizerService.generateRandomLayers();
 
-    const layerForms = layers.map((layer) =>
-      this.createLayerFormGroup(layer, this.#fb)
-    );
+    const layerForms = layers.map((layer) => this.createLayerFormGroup(layer, this.#fb));
 
     this.form.setControl('layers', this.#fb.array(layerForms));
   }

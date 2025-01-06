@@ -1,4 +1,4 @@
-name: "pr"
+name: 'pr'
 on:
   workflow_dispatch:
   pull_request:

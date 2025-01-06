@@ -1,26 +1,15 @@
 <h1 class="title"><a [href]="repoUrl">ngx-parallax-stars</a></h1>
 
-<ngx-parallax-stars
-  id="stars"
-  [layers]="layers()"
-  [responsive]="responsive()"
-></ngx-parallax-stars>
+<ngx-parallax-stars id="stars" [layers]="layers()" [responsive]="responsive()"></ngx-parallax-stars>
 
 <a [href]="repoUrl" class="repo-link">
-  <img
-    ngSrc="assets/images/github-mark-white.svg"
-    width="48"
-    height="48"
-    alt="github logo"
+  <img ngSrc="assets/images/github-mark-white.svg" width="48" height="48" alt="github logo"
 /></a>
 
 <span class="version">v3.0.0</span>
 
 <div class="config-container">
-  <ngx-parallax-stars-config
-    [class.hidden]="!isConfigOpen()"
-    (configChanged)="updateComponent($event)"
-  >
+  <ngx-parallax-stars-config [class.hidden]="!isConfigOpen()" (configChanged)="updateComponent($event)">
   </ngx-parallax-stars-config>
   <button
     mat-fab
