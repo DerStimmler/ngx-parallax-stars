@@ -30,7 +30,6 @@ import NgxParallaxStarsComponent from 'ngx-parallax-stars';
 
 @Component({
   selector: 'app-main',
-  standalone: true,
   imports: [CommonModule, NgxParallaxStarsComponent],
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.scss'],
