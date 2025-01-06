@@ -12,20 +12,19 @@ import { ConfigForm } from '../config/config-form';
 import { MouseHighlighterComponent } from '../mouse-highlighter/mouse-highlighter.component';
 
 @Component({
-  selector: 'ngx-parallax-stars-main',
-  standalone: true,
-  imports: [
-    CommonModule,
-    NgxParallaxStarsComponent,
-    MatButtonModule,
-    MatIconModule,
-    ConfigComponent,
-    NgOptimizedImage,
-    MouseHighlighterComponent,
-  ],
-  templateUrl: './main.component.html',
-  styleUrls: ['./main.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'ngx-parallax-stars-main',
+    imports: [
+        CommonModule,
+        NgxParallaxStarsComponent,
+        MatButtonModule,
+        MatIconModule,
+        ConfigComponent,
+        NgOptimizedImage,
+        MouseHighlighterComponent,
+    ],
+    templateUrl: './main.component.html',
+    styleUrls: ['./main.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MainComponent {
   repoUrl = 'https://github.com/DerStimmler/ngx-parallax-stars';

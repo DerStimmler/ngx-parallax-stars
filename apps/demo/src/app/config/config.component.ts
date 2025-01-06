@@ -24,24 +24,23 @@ import { outputFromObservable } from '@angular/core/rxjs-interop';
 import { MatDivider } from '@angular/material/divider';
 
 @Component({
-  selector: 'ngx-parallax-stars-config',
-  standalone: true,
-  imports: [
-    CommonModule,
-    MatCardModule,
-    MatButtonModule,
-    ReactiveFormsModule,
-    MatInputModule,
-    MatIconModule,
-    MatSliderModule,
-    MatSelectModule,
-    MatSlideToggleModule,
-    MatCheckboxModule,
-    MatTooltipModule,
-    MatDivider,
-  ],
-  templateUrl: './config.component.html',
-  styleUrls: ['./config.component.scss'],
+    selector: 'ngx-parallax-stars-config',
+    imports: [
+        CommonModule,
+        MatCardModule,
+        MatButtonModule,
+        ReactiveFormsModule,
+        MatInputModule,
+        MatIconModule,
+        MatSliderModule,
+        MatSelectModule,
+        MatSlideToggleModule,
+        MatCheckboxModule,
+        MatTooltipModule,
+        MatDivider,
+    ],
+    templateUrl: './config.component.html',
+    styleUrls: ['./config.component.scss']
 })
 export class ConfigComponent {
   #fb = inject(NonNullableFormBuilder);

@@ -14,12 +14,11 @@ import { debounceTime, filter } from 'rxjs';
 import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
-  selector: 'ngx-parallax-stars',
-  standalone: true,
-  imports: [CommonModule],
-  template: '',
-  styles: [':host { display: block; overflow: hidden; }'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'ngx-parallax-stars',
+    imports: [CommonModule],
+    template: '',
+    styles: [':host { display: block; overflow: hidden; }'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NgxParallaxStarsComponent {
   #elRef = inject(ElementRef);
