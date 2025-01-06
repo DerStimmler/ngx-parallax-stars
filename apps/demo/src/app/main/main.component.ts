@@ -15,8 +15,8 @@ import { MouseHighlighterComponent } from '../mouse-highlighter/mouse-highlighte
     MatIconModule,
     ConfigComponent,
     NgOptimizedImage,
-    MouseHighlighterComponent
-],
+    MouseHighlighterComponent,
+  ],
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

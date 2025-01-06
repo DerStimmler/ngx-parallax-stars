@@ -16,7 +16,6 @@ import { Clipboard } from '@angular/cdk/clipboard';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { LayerRandomizerService } from './layer-randomizer.service';
 import { outputFromObservable } from '@angular/core/rxjs-interop';
-import { MatDivider } from '@angular/material/divider';
 
 @Component({
   selector: 'ngx-parallax-stars-config',
@@ -31,8 +30,7 @@ import { MatDivider } from '@angular/material/divider';
     MatSlideToggleModule,
     MatCheckboxModule,
     MatTooltipModule,
-    MatDivider
-],
+  ],
   templateUrl: './config.component.html',
   styleUrls: ['./config.component.scss'],
 })
@@ -101,7 +99,6 @@ export class ConfigComponent {
     const layers = this.#layerRandomizerService.generateRandomLayers();
 
     const layerForms = layers.map((layer) => this.createLayerFormGroup(layer, this.#fb));
-
     this.form.setControl('layers', this.#fb.array(layerForms));
   }
 }

@@ -91,3 +91,16 @@
     margin-right: 0.25rem;
   }
 }
+
+.general-config {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  margin-bottom: 1rem;
+}
+
+.general-config-layout {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}

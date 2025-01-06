@@ -68,10 +68,11 @@
   justify-self: end;
   margin: var(--margin);
   max-height: calc(100vh - 2 * var(--margin));
+  z-index: 2;
+
   @supports (max-height: 100svh) {
     max-height: calc(100svh - 2 * var(--margin));
   }
-  z-index: 2;
 }
 
 .config-button {
