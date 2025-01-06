@@ -79,6 +79,7 @@ export class ConfigComponent {
 
   private createLayerFormGroup(layer: StarLayer, fb: NonNullableFormBuilder) {
     return fb.group({
+      id: crypto.randomUUID(), //because of tracking
       color: [layer.color],
       speed: [layer.speed],
       density: [layer.density],
@@ -91,8 +92,9 @@ export class ConfigComponent {
   }
 
   protected exportLayers(): void {
-    const layers = JSON.stringify(this.formLayers.getRawValue());
-    this.#clipboard.copy(layers);
+    const layers = this.formLayers.getRawValue().map((layer) => ({ ...layer, id: undefined })); //remove id that is used for tracking in template
+    const layersJson = JSON.stringify(layers);
+    this.#clipboard.copy(layersJson);
   }
 
   protected randomizeLayers(): void {
