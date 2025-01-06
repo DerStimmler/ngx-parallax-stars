@@ -9,6 +9,8 @@ jobs:
   publish:
     name: Publish
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -47,10 +49,22 @@ jobs:
           npm version ${{ env.VERSION }} --no-git-tag-version
         working-directory: dist/libs/ngx-parallax-stars
 
+      - name: Archive package directory
+        run: |
+          tar -czvf ngx-parallax-stars-${{ env.VERSION }}.tar.gz dist/libs/ngx-parallax-stars
+
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          path: dist/libs/ngx-parallax-stars
+          path: ngx-parallax-stars-${{ env.VERSION }}.tar.gz
+
+      - name: Attach package to GitHub release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: ngx-parallax-stars-${{ env.VERSION }}.tar.gz
+          tag: ${{ github.ref }}
+          overwrite: true
 
       - name: Publish package to npm
         run: |
