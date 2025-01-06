@@ -33,17 +33,14 @@ export class NgxParallaxStarsComponent {
   #initialized = signal(false);
 
   constructor() {
-    effect(
-      () => {
-        const size = this.#size();
+    effect(() => {
+      const size = this.#size();
 
-        if (size) {
-          this.#renderStars(this.layers(), size.width, size.height);
-          this.#initialized.set(true);
-        }
-      },
-      { allowSignalWrites: true }
-    );
+      if (size) {
+        this.#renderStars(this.layers(), size.width, size.height);
+        this.#initialized.set(true);
+      }
+    });
   }
 
   #renderStars(layers: StarLayer[], width: number, height: number): void {
