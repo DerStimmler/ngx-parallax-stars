@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
-import { CommonModule, NgOptimizedImage } from '@angular/common';
+import { NgOptimizedImage } from '@angular/common';
 import { defaultStarLayers, NgxParallaxStarsComponent, StarLayer } from 'ngx-parallax-stars';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -10,14 +10,13 @@ import { MouseHighlighterComponent } from '../mouse-highlighter/mouse-highlighte
 @Component({
   selector: 'ngx-parallax-stars-main',
   imports: [
-    CommonModule,
     NgxParallaxStarsComponent,
     MatButtonModule,
     MatIconModule,
     ConfigComponent,
     NgOptimizedImage,
-    MouseHighlighterComponent,
-  ],
+    MouseHighlighterComponent
+],
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, effect, ElementRef, inject, input, signal } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { defaultStarLayers, StarLayer } from '../star-layer';
 import { randomInt, resizeObservable } from '../utils';
 import { debounceTime, filter } from 'rxjs';
@@ -7,7 +7,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'ngx-parallax-stars',
-  imports: [CommonModule],
+  imports: [],
   template: '',
   styles: [':host { display: block; overflow: hidden; }'],
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -1,9 +1,9 @@
 import { AfterViewInit, Component, ElementRef, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 
 @Component({
   selector: 'ngx-parallax-stars-mouse-highlighter',
-  imports: [CommonModule],
+  imports: [],
   template: '',
   styleUrls: ['./mouse-highlighter.component.scss'],
 })

@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { FormArray, FormGroup, NonNullableFormBuilder, ReactiveFormsModule } from '@angular/forms';
@@ -21,7 +21,6 @@ import { MatDivider } from '@angular/material/divider';
 @Component({
   selector: 'ngx-parallax-stars-config',
   imports: [
-    CommonModule,
     MatCardModule,
     MatButtonModule,
     ReactiveFormsModule,
@@ -32,8 +31,8 @@ import { MatDivider } from '@angular/material/divider';
     MatSlideToggleModule,
     MatCheckboxModule,
     MatTooltipModule,
-    MatDivider,
-  ],
+    MatDivider
+],
   templateUrl: './config.component.html',
   styleUrls: ['./config.component.scss'],
 })
