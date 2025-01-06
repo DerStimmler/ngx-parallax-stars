@@ -1,8 +1,17 @@
-import { ChangeDetectionStrategy, Component, effect, ElementRef, inject, input, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  effect,
+  ElementRef,
+  inject,
+  input,
+  Renderer2,
+  signal,
+} from '@angular/core';
 
 import { defaultStarLayers, StarLayer } from '../star-layer';
 import { randomInt, resizeObservable } from '../utils';
-import { debounceTime, filter } from 'rxjs';
+import { debounceTime, distinctUntilChanged, filter } from 'rxjs';
 import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
@@ -13,6 +22,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NgxParallaxStarsComponent {
+  #renderer = inject(Renderer2);
   #elRef = inject(ElementRef);
 
   /**
@@ -27,7 +37,8 @@ export class NgxParallaxStarsComponent {
   #size = toSignal(
     resizeObservable(this.#elRef.nativeElement).pipe(
       filter(() => this.responsive() || !this.#initialized()),
-      debounceTime(100)
+      debounceTime(100),
+      distinctUntilChanged()
     )
   );
   #initialized = signal(false);
@@ -44,49 +55,63 @@ export class NgxParallaxStarsComponent {
   }
 
   #renderStars(layers: StarLayer[], width: number, height: number): void {
-    this.#elRef.nativeElement.replaceChildren();
+    this.#renderer.setProperty(this.#elRef.nativeElement, 'innerHTML', '');
 
     layers.forEach((layer) => {
       const boxShadow = this.#createBoxShadow(width, height, layer.density, layer.color, layer.blur, layer.glow);
 
-      const layerElement = document.createElement('div');
-      layerElement.style.width = `${layer.size}px`;
-      layerElement.style.height = `${layer.size}px`;
-      layerElement.style.background = 'transparent';
-      layerElement.style.boxShadow = boxShadow;
-      layerElement.style.borderRadius = layer.isRound ? '50%' : '0';
-      layerElement.animate(this.#createKeyFramesForLayer(layer, width, height), {
-        duration: 1000000 / layer.speed,
-        iterations: Infinity,
-      });
+      const layerElement = this.createLayerElement(layer, boxShadow, width, height);
 
-      const afterLayerElement = document.createElement('span');
-      afterLayerElement.style.content = ' ';
-      afterLayerElement.style.position = 'absolute';
-      afterLayerElement.style.width = `${layer.size}px`;
-      afterLayerElement.style.height = `${layer.size}px`;
-      afterLayerElement.style.background = 'transparent';
-      afterLayerElement.style.boxShadow = boxShadow;
+      const afterLayerElement = this.createAfterLayerElement(layer, boxShadow, height, width);
 
-      switch (layer.direction) {
-        case 'up':
-          afterLayerElement.style.top = `${height}px`;
-          break;
-        case 'down':
-          afterLayerElement.style.bottom = `${height}px`;
-          break;
-        case 'left':
-          afterLayerElement.style.left = `${width}px`;
-          break;
-        case 'right':
-          afterLayerElement.style.right = `${width}px`;
-          break;
-      }
+      this.#renderer.appendChild(layerElement, afterLayerElement);
 
-      layerElement.appendChild(afterLayerElement);
-
-      this.#elRef.nativeElement.appendChild(layerElement);
+      this.#renderer.appendChild(this.#elRef.nativeElement, layerElement);
     });
+  }
+
+  private createAfterLayerElement(layer: StarLayer, boxShadow: string, height: number, width: number) {
+    const afterLayerElement = this.#renderer.createElement('span');
+
+    this.#renderer.setStyle(afterLayerElement, 'content', ' ');
+    this.#renderer.setStyle(afterLayerElement, 'position', 'absolute');
+    this.#renderer.setStyle(afterLayerElement, 'width', `${layer.size}px`);
+    this.#renderer.setStyle(afterLayerElement, 'height', `${layer.size}px`);
+    this.#renderer.setStyle(afterLayerElement, 'background', 'transparent');
+    this.#renderer.setStyle(afterLayerElement, 'boxShadow', boxShadow);
+
+    switch (layer.direction) {
+      case 'up':
+        this.#renderer.setStyle(afterLayerElement, 'top', `${height}px`);
+        break;
+      case 'down':
+        this.#renderer.setStyle(afterLayerElement, 'bottom', `${height}px`);
+        break;
+      case 'left':
+        this.#renderer.setStyle(afterLayerElement, 'left', `${width}px`);
+        break;
+      case 'right':
+        this.#renderer.setStyle(afterLayerElement, 'right', `${width}px`);
+        break;
+    }
+
+    return afterLayerElement;
+  }
+
+  private createLayerElement(layer: StarLayer, boxShadow: string, width: number, height: number) {
+    const layerElement = this.#renderer.createElement('div');
+
+    this.#renderer.setStyle(layerElement, 'width', `${layer.size}px`);
+    this.#renderer.setStyle(layerElement, 'height', `${layer.size}px`);
+    this.#renderer.setStyle(layerElement, 'background', 'transparent');
+    this.#renderer.setStyle(layerElement, 'boxShadow', boxShadow);
+    this.#renderer.setStyle(layerElement, 'borderRadius', layer.isRound ? '50%' : '0');
+    layerElement.animate(this.#createKeyFramesForLayer(layer, width, height), {
+      duration: 1000000 / layer.speed,
+      iterations: Infinity,
+    });
+
+    return layerElement;
   }
 
   #createKeyFramesForLayer(layer: StarLayer, width: number, height: number): Keyframe[] {
@@ -130,6 +155,9 @@ export class NgxParallaxStarsComponent {
             transform: `translateX(${width}px)`,
           },
         ];
+      }
+      default: {
+        throw new Error(`Invalid direction: ${layer.direction}`);
       }
     }
   }
