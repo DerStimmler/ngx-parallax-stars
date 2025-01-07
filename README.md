@@ -22,9 +22,9 @@ npm install ngx-parallax-stars
 
 | Package version | Angular version |
 |-----------------|-----------------|
-| v4.x.x          | v19.x.x         |
-| v3.x.x          | v18.x.x         |
-| before v3.x.x   | v15.2.x         |
+| `4.x.x`         | `>=19.0.0`      |
+| `3.x.x`         | `>=18.0.1`      |
+| `2.x.x`         | `>=15.2.0`      |
 
 ## Usage
 
