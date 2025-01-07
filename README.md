@@ -20,6 +20,12 @@ Available on [npm](https://www.npmjs.org/package/ngx-parallax-stars/).
 npm install ngx-parallax-stars
 ```
 
+| Package version | Angular version |
+|-----------------|-----------------|
+| v4.x.x          | v19.x.x         |
+| v3.x.x          | v18.x.x         |
+| before v3.x.x   | v15.2.x         |
+
 ## Usage
 
 Just import the standalone `NgxParallaxStarsComponent` into the component you want to use it in.
