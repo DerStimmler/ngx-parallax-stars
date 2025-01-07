@@ -2,18 +2,18 @@
   <mat-card-header>
     <mat-card-title>Configuration</mat-card-title>
   </mat-card-header>
-  <mat-card-content class="content" [formGroup]="form">
+  <mat-card-content [formGroup]="form" class="content">
     <mat-card class="general-config">
       <mat-card-content>
         <div class="general-config-layout">
-          <button mat-mini-fab color="primary" matTooltip="Create random layers" (click)="randomizeLayers()">
+          <button (click)="randomizeLayers()" color="primary" mat-mini-fab matTooltip="Create random layers">
             <mat-icon>auto_mode</mat-icon>
           </button>
-          <button mat-stroked-button color="primary" aria-label="Button to export star layers" (click)="exportLayers()">
+          <button (click)="exportLayers()" aria-label="Button to export star layers" color="primary" mat-stroked-button>
             <mat-icon>content_copy</mat-icon>
             Copy current layers to clipboard
           </button>
-          <mat-slide-toggle formControlName="responsive" color="primary">Responsive</mat-slide-toggle>
+          <mat-slide-toggle color="primary" formControlName="responsive">Responsive</mat-slide-toggle>
         </div>
       </mat-card-content>
     </mat-card>
@@ -71,14 +71,14 @@
                     <input matSliderThumb formControlName="glow" />
                   </mat-slider>
                 </div>
-                <mat-checkbox labelPosition="before" color="primary" formControlName="isRound"> isRound </mat-checkbox>
+                <mat-checkbox labelPosition="before" color="primary" formControlName="isRound"> isRound</mat-checkbox>
               </div>
             </mat-card-content>
           </mat-card>
         }
       </ng-container>
       <div class="grid-1">
-        <button mat-mini-fab color="primary" matTooltip="Add layer" (click)="addLayer()">
+        <button (click)="addLayer()" color="primary" mat-mini-fab matTooltip="Add layer">
           <mat-icon>add</mat-icon>
         </button>
       </div>

@@ -22,9 +22,6 @@ import { toSignal } from '@angular/core/rxjs-interop';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NgxParallaxStarsComponent {
-  #renderer = inject(Renderer2);
-  #elRef = inject(ElementRef);
-
   /**
    * Overrides default star layers
    */
@@ -33,7 +30,9 @@ export class NgxParallaxStarsComponent {
    * If responsive mode is enabled, the component will automatically be re-rendered when its size changes
    */
   responsive = input<boolean>(true);
-
+  #renderer = inject(Renderer2);
+  #elRef = inject(ElementRef);
+  #initialized = signal(false);
   #size = toSignal(
     resizeObservable(this.#elRef.nativeElement).pipe(
       filter(() => this.responsive() || !this.#initialized()),
@@ -41,7 +40,6 @@ export class NgxParallaxStarsComponent {
       distinctUntilChanged()
     )
   );
-  #initialized = signal(false);
 
   constructor() {
     effect(() => {

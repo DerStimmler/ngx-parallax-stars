@@ -1,6 +1,5 @@
 import { AfterViewInit, Component, ElementRef, inject } from '@angular/core';
 
-
 @Component({
   selector: 'ngx-parallax-stars-mouse-highlighter',
   imports: [],

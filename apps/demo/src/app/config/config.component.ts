@@ -36,17 +36,15 @@ import { outputFromObservable } from '@angular/core/rxjs-interop';
 })
 export class ConfigComponent {
   #fb = inject(NonNullableFormBuilder);
-  #clipboard = inject(Clipboard);
-  #layerRandomizerService = inject(LayerRandomizerService);
-
   protected form = this.#buildForm(this.#fb);
-
   configChanged = outputFromObservable<ConfigForm>(
     this.form.valueChanges.pipe(
       debounceTime(100),
       map(() => this.form.getRawValue())
     )
   );
+  #clipboard = inject(Clipboard);
+  #layerRandomizerService = inject(LayerRandomizerService);
 
   protected get formLayers(): FormArray {
     return this.form.controls['layers'] as FormArray;
@@ -66,6 +64,19 @@ export class ConfigComponent {
 
   protected formatPxLabel(value: number): string {
     return `${value}px`;
+  }
+
+  protected exportLayers(): void {
+    const layers = this.formLayers.getRawValue().map((layer) => ({ ...layer, id: undefined })); //remove id that is used for tracking in template
+    const layersJson = JSON.stringify(layers);
+    this.#clipboard.copy(layersJson);
+  }
+
+  protected randomizeLayers(): void {
+    const layers = this.#layerRandomizerService.generateRandomLayers();
+
+    const layerForms = layers.map((layer) => this.createLayerFormGroup(layer, this.#fb));
+    this.form.setControl('layers', this.#fb.array(layerForms));
   }
 
   #buildForm(fb: NonNullableFormBuilder): FormGroup {
@@ -89,18 +100,5 @@ export class ConfigComponent {
       glow: [layer.glow],
       isRound: [layer.isRound],
     });
-  }
-
-  protected exportLayers(): void {
-    const layers = this.formLayers.getRawValue().map((layer) => ({ ...layer, id: undefined })); //remove id that is used for tracking in template
-    const layersJson = JSON.stringify(layers);
-    this.#clipboard.copy(layersJson);
-  }
-
-  protected randomizeLayers(): void {
-    const layers = this.#layerRandomizerService.generateRandomLayers();
-
-    const layerForms = layers.map((layer) => this.createLayerFormGroup(layer, this.#fb));
-    this.form.setControl('layers', this.#fb.array(layerForms));
   }
 }
