@@ -52,6 +52,7 @@ jobs:
       - name: Copy repo files
         run: |
           cp README.md dist/libs/ngx-parallax-stars/README.md
+          cp LICENSE.md dist/libs/ngx-parallax-stars/LICENSE.md
 
       - name: Pack package
         run: |
