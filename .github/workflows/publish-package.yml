@@ -49,6 +49,10 @@ jobs:
           npm version ${{ env.VERSION }} --no-git-tag-version
         working-directory: dist/libs/ngx-parallax-stars
 
+      - name: Copy repo files
+        run: |
+          cp README.md dist/libs/ngx-parallax-stars/README.md
+
       - name: Pack package
         run: |
           npm pack --pack-destination '..'
