@@ -20,11 +20,7 @@ Available on [npm](https://www.npmjs.org/package/ngx-parallax-stars/).
 npm install ngx-parallax-stars
 ```
 
-| Package version | Angular version |
-|-----------------|-----------------|
-| `4.x.x`         | `>=19.0.0`      |
-| `3.x.x`         | `>=18.0.1`      |
-| `2.x.x`         | `>=15.2.0`      |
+Required Angular version: `>=17.0.0`
 
 ## Usage
 
