@@ -3,7 +3,8 @@
   "compilerOptions": {
     "outDir": "../../dist/out-tsc",
     "noUnusedLocals": true,
-    "types": []
+    "types": [],
+    "moduleResolution": "bundler"
   },
   "files": ["src/main.ts"],
   "include": ["src/**/*.d.ts"],

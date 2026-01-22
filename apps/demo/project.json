@@ -4,6 +4,7 @@
   "projectType": "application",
   "sourceRoot": "apps/demo/src",
   "prefix": "ngx-parallax-stars",
+  "tags": [],
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:application",
@@ -55,7 +56,8 @@
           "buildTarget": "demo:build:development"
         }
       },
-      "defaultConfiguration": "development"
+      "defaultConfiguration": "development",
+      "continuous": true
     },
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
@@ -71,9 +73,9 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "apps/demo/jest.config.ts"
+        "jestConfig": "apps/demo/jest.config.ts",
+        "tsConfig": "apps/demo/tsconfig.spec.json"
       }
     }
-  },
-  "tags": []
+  }
 }
