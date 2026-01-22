@@ -1,14 +1,13 @@
 <h1 class="title"><a [href]="repoUrl">ngx-parallax-stars</a></h1>
 
-<ngx-parallax-stars [layers]="layers()" [responsive]="responsive()" id="stars"></ngx-parallax-stars>
+<ngx-parallax-stars [layers]="layers()" [responsive]="responsive()" id="stars" />
 
 <a [href]="repoUrl" class="repo-link">
   <img alt="github logo" height="48" ngSrc="assets/images/github-mark-white.svg" width="48"
 /></a>
 
 <div class="config-container">
-  <ngx-parallax-stars-config (configChanged)="updateComponent($event)" [class.hidden]="!isConfigOpen()">
-  </ngx-parallax-stars-config>
+  <ngx-parallax-stars-config (configChanged)="updateComponent($event)" [class.hidden]="!isConfigOpen()" />
   <button
     (click)="toggleConfig()"
     aria-label="Button with settings icon to toggle configuration"
@@ -20,4 +19,4 @@
   </button>
 </div>
 
-<ngx-parallax-stars-mouse-highlighter></ngx-parallax-stars-mouse-highlighter>
+<ngx-parallax-stars-mouse-highlighter />
