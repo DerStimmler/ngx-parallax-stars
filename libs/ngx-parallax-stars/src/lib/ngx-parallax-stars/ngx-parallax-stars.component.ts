@@ -15,6 +15,7 @@ import { debounceTime, distinctUntilChanged, filter } from 'rxjs';
 import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
+  // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'ngx-parallax-stars',
   imports: [],
   template: '',
