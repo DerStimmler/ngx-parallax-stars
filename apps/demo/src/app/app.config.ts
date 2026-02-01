@@ -3,5 +3,5 @@ import { provideRouter, withEnabledBlockingInitialNavigation } from '@angular/ro
 import { appRoutes } from './app.routes';
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideRouter(appRoutes, withEnabledBlockingInitialNavigation()), provideZonelessChangeDetection()],
+  providers: [provideRouter(appRoutes, withEnabledBlockingInitialNavigation()), provideZonelessChangeDetection()]
 };

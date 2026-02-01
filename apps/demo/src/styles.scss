@@ -8,14 +8,14 @@ $theme: mat.define-theme(
     color: (
       theme-type: light,
       primary: mat.$azure-palette,
-      tertiary: mat.$violet-palette,
+      tertiary: mat.$violet-palette
     ),
     typography: (
-      brand-family: Comfortaa,
+      brand-family: Comfortaa
     ),
     density: (
-      scale: -3,
-    ),
+      scale: -3
+    )
   )
 );
 

@@ -19,7 +19,7 @@ export function resizeObservable(element: Element): Observable<{
 
         return subscriber.next({
           width: contentRect.width,
-          height: contentRect.height,
+          height: contentRect.height
         });
       }
     });

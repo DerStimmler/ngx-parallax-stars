@@ -24,7 +24,7 @@ export class LayerRandomizerService {
       size: this.#generateRandomInteger(1, 6),
       speed: this.#generateRandomInteger(5, 20),
       isRound: this.#getRandomBoolean(),
-      direction: this.#getRandomItem(['up', 'down', 'left', 'right']),
+      direction: this.#getRandomItem(['up', 'down', 'left', 'right'])
     };
   }
 

@@ -29,10 +29,10 @@ import { outputFromObservable } from '@angular/core/rxjs-interop';
     MatSelectModule,
     MatSlideToggleModule,
     MatCheckboxModule,
-    MatTooltipModule,
+    MatTooltipModule
   ],
   templateUrl: './config.component.html',
-  styleUrls: ['./config.component.scss'],
+  styleUrls: ['./config.component.scss']
 })
 export class ConfigComponent {
   #fb = inject(NonNullableFormBuilder);
@@ -84,7 +84,7 @@ export class ConfigComponent {
 
     return fb.group({
       layers: fb.array(layerForms),
-      responsive: fb.control(true),
+      responsive: fb.control(true)
     });
   }
 
@@ -98,7 +98,7 @@ export class ConfigComponent {
       direction: [layer.direction],
       blur: [layer.blur],
       glow: [layer.glow],
-      isRound: [layer.isRound],
+      isRound: [layer.isRound]
     });
   }
 }

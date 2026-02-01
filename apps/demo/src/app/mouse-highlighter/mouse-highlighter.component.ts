@@ -4,7 +4,7 @@ import { AfterViewInit, Component, ElementRef, inject } from '@angular/core';
   selector: 'ngx-parallax-stars-mouse-highlighter',
   imports: [],
   template: '',
-  styleUrls: ['./mouse-highlighter.component.scss'],
+  styleUrls: ['./mouse-highlighter.component.scss']
 })
 export class MouseHighlighterComponent implements AfterViewInit {
   #elRef = inject(ElementRef);

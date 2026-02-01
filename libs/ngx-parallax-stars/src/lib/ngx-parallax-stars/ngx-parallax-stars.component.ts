@@ -6,7 +6,7 @@ import {
   inject,
   input,
   Renderer2,
-  signal,
+  signal
 } from '@angular/core';
 
 import { defaultStarLayers, StarLayer } from '../star-layer';
@@ -20,7 +20,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
   imports: [],
   template: '',
   styles: [':host { display: block; overflow: hidden; }'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NgxParallaxStarsComponent {
   /**
@@ -107,7 +107,7 @@ export class NgxParallaxStarsComponent {
     this.#renderer.setStyle(layerElement, 'borderRadius', layer.isRound ? '50%' : '0');
     layerElement.animate(this.#createKeyFramesForLayer(layer, width, height), {
       duration: 1000000 / layer.speed,
-      iterations: Infinity,
+      iterations: Infinity
     });
 
     return layerElement;
@@ -118,41 +118,41 @@ export class NgxParallaxStarsComponent {
       case 'up': {
         return [
           {
-            transform: 'translateY(0)',
+            transform: 'translateY(0)'
           },
           {
-            transform: `translateY(-${height}px)`,
-          },
+            transform: `translateY(-${height}px)`
+          }
         ];
       }
       case 'down': {
         return [
           {
-            transform: 'translateY(0)',
+            transform: 'translateY(0)'
           },
           {
-            transform: `translateY(${height}px)`,
-          },
+            transform: `translateY(${height}px)`
+          }
         ];
       }
       case 'left': {
         return [
           {
-            transform: 'translateX(0)',
+            transform: 'translateX(0)'
           },
           {
-            transform: `translateX(-${width}px)`,
-          },
+            transform: `translateX(-${width}px)`
+          }
         ];
       }
       case 'right': {
         return [
           {
-            transform: 'translateX(0)',
+            transform: 'translateX(0)'
           },
           {
-            transform: `translateX(${width}px)`,
-          },
+            transform: `translateX(${width}px)`
+          }
         ];
       }
       default: {

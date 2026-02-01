@@ -45,7 +45,7 @@ export const defaultStarLayers: StarLayer[] = [
     direction: 'up',
     blur: 5,
     glow: 1,
-    isRound: false,
+    isRound: false
   },
   {
     color: '#ffffff',
@@ -55,7 +55,7 @@ export const defaultStarLayers: StarLayer[] = [
     direction: 'up',
     blur: 1,
     glow: 2,
-    isRound: false,
+    isRound: false
   },
   {
     color: '#ffffff',
@@ -65,6 +65,6 @@ export const defaultStarLayers: StarLayer[] = [
     direction: 'up',
     blur: 0,
     glow: 5,
-    isRound: false,
-  },
+    isRound: false
+  }
 ];
