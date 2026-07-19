@@ -13,10 +13,12 @@
     "lib": ["es2017", "dom"],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
-    "baseUrl": ".",
     "paths": {
-      "ngx-parallax-stars": ["libs/ngx-parallax-stars/src/index.ts"]
-    }
+      "ngx-parallax-stars": ["./libs/ngx-parallax-stars/src/index.ts"]
+    },
+    "strict": true,
+    "noUncheckedSideEffectImports": true,
+    "types": ["*"]
   },
   "exclude": ["node_modules", "tmp"]
 }
