@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
@@ -32,6 +32,7 @@ import { outputFromObservable } from '@angular/core/rxjs-interop';
     MatTooltipModule
   ],
   templateUrl: './config.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrls: ['./config.component.scss']
 })
 export class ConfigComponent {

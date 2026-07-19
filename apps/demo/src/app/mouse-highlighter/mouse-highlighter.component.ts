@@ -1,9 +1,10 @@
-import { AfterViewInit, Component, ElementRef, inject } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, inject, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
   selector: 'ngx-parallax-stars-mouse-highlighter',
   imports: [],
   template: '',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrls: ['./mouse-highlighter.component.scss']
 })
 export class MouseHighlighterComponent implements AfterViewInit {
