@@ -21,6 +21,10 @@
     "url": "https://github.com/DerStimmler/ngx-parallax-stars/issues"
   },
   "homepage": "https://derstimmler.github.io/ngx-parallax-stars/",
+  "engines": {
+    "node": ">=26.0.0"
+  },
+  "packageManager": "pnpm@11.11.0",
   "scripts": {
     "demo": "pnpm nx serve demo",
     "test": "pnpm nx run-many --all --target=test --parallel",

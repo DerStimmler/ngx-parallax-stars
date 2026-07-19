@@ -17,11 +17,10 @@
     "paths": {
       "ngx-parallax-stars": ["libs/ngx-parallax-stars/src/index.ts"]
     },
-    "strict": false,
-    "noUncheckedSideEffectImports": false,
+    "strict": true,
+    "noUncheckedSideEffectImports": true,
     "types": ["*"],
-    "esModuleInterop": false,
-    "ignoreDeprecations": "6.0"
+    "esModuleInterop": false
   },
   "exclude": ["node_modules", "tmp"]
 }

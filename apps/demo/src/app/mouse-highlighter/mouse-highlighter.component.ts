@@ -4,7 +4,7 @@ import { AfterViewInit, Component, ElementRef, inject, ChangeDetectionStrategy }
   selector: 'ngx-parallax-stars-mouse-highlighter',
   imports: [],
   template: '',
-  changeDetection: ChangeDetectionStrategy.Eager,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['./mouse-highlighter.component.scss']
 })
 export class MouseHighlighterComponent implements AfterViewInit {

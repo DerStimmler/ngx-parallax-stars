@@ -1,21 +1,21 @@
-import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 
-import { MatCardModule } from '@angular/material/card';
-import { MatButtonModule } from '@angular/material/button';
+import { Clipboard } from '@angular/cdk/clipboard';
+import { outputFromObservable } from '@angular/core/rxjs-interop';
 import { FormArray, FormGroup, NonNullableFormBuilder, ReactiveFormsModule } from '@angular/forms';
-import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatSliderModule } from '@angular/material/slider';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { defaultStarLayers, StarLayer } from 'ngx-parallax-stars';
 import { debounceTime, map } from 'rxjs';
-import { MatSliderModule } from '@angular/material/slider';
-import { MatSelectModule } from '@angular/material/select';
 import { ConfigForm } from './config-form';
-import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import { Clipboard } from '@angular/cdk/clipboard';
-import { MatTooltipModule } from '@angular/material/tooltip';
 import { LayerRandomizerService } from './layer-randomizer.service';
-import { outputFromObservable } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'ngx-parallax-stars-config',
@@ -32,7 +32,7 @@ import { outputFromObservable } from '@angular/core/rxjs-interop';
     MatTooltipModule
   ],
   templateUrl: './config.component.html',
-  changeDetection: ChangeDetectionStrategy.Eager,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['./config.component.scss']
 })
 export class ConfigComponent {
