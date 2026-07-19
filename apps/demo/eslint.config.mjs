@@ -22,18 +22,13 @@ export default [
           prefix: 'ngx-parallax-stars',
           style: 'kebab-case'
         }
-      ],
-      '@angular-eslint/prefer-standalone': 'off',
-      // Newly enabled by the Angular ESLint preset; was not enforced before the upgrade.
-      '@angular-eslint/prefer-on-push-component-change-detection': 'off'
+      ]
     }
   },
   ...nx.configs['flat/angular-template'],
   {
     files: ['**/*.html'],
     rules: {
-      // Newly enabled by the Angular ESLint preset; was not enforced before the upgrade.
-      '@angular-eslint/template/label-has-associated-control': 'off'
     }
   }
 ];

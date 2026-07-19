@@ -22,8 +22,7 @@ export default [
           prefix: 'ngx-parallax-stars',
           style: 'kebab-case'
         }
-      ],
-      '@angular-eslint/prefer-standalone': 'off'
+      ]
     }
   },
   ...nx.configs['flat/angular-template']

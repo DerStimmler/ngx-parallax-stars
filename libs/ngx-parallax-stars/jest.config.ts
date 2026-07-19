@@ -1,4 +1,4 @@
-/* eslint-disable */
+ 
 export default {
   displayName: 'ngx-parallax-stars',
   preset: '../../jest.preset.js',
