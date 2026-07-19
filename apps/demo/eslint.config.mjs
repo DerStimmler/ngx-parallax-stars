@@ -28,7 +28,6 @@ export default [
   ...nx.configs['flat/angular-template'],
   {
     files: ['**/*.html'],
-    rules: {
-    }
+    rules: {}
   }
 ];
